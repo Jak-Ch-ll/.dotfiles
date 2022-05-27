@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/jchill/learning/vim/vim-nav-playground/src'
+let g:netrw_dirhist_6='/home/jchill/learning/vim/vim-nav-playground'
+let g:netrw_dirhist_5='/home/jchill/learning/vim'
+let g:netrw_dirhist_4='/home/jchill/learning/vim/vim-nav-playground/src'
+let g:netrw_dirhist_3='/home/jchill/learning/vim'
+let g:netrw_dirhist_2='/home/jchill/learning/vim/vim-nav-playground'
+let g:netrw_dirhist_1='/home/jchill/learning/vim/vim-nav-playground/src'
+let g:netrw_dirhist_0='/home/jchill/learning/vim/vim-nav-playground'
+let g:netrw_dirhist_9='/home/jchill/learning/vim/vim-nav-playground/src'
+let g:netrw_dirhist_8='/home/jchill/learning/vim/vim-nav-playground'

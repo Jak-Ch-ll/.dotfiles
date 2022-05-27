@@ -1,0 +1,9 @@
+#!/bin/bash
+
+readarray arr < <(find ~/.dotfiles/ -maxdepth 1 -type d ! -iname ".*" -exec basename {} \;)
+
+
+for file in ${arr[@]}
+do
+    stow $file
+done
