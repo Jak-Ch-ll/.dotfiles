@@ -1,4 +1,8 @@
 {
     "dialog.confirmKey": "<tab>",
-    "suggest.enablePreselect": false
+    "suggest.enablePreselect": false,
+    
+    "coc.preferences.formatOnSaveFiletypes": [
+        "rust"
+    ]
 }

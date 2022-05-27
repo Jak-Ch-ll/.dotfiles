@@ -14,10 +14,18 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 " alternative to fzf in nvim: telescope
 
 let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-rust-analyzer']
+
+" nerdcommenter
+filetype plugin on
+let g:NERDSpaceDelims = 1
+let g:NERDCreateDefaultMappings = 0
+nnoremap <leader>c<space> :call nerdcommenter#Comment('n', 'toggle')<CR>
+vnoremap <leader>c<space> :call nerdcommenter#Comment('v', 'toggle')<CR>
 
 " color scheme
 set termguicolors
@@ -42,10 +50,10 @@ tnoremap <Esc> <C-\><C-n>
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm(): :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+      " \ pumvisible() ? coc#_select_confirm(): :
+      " \ CheckBackspace() ? "\<TAB>" :
+      " \ coc#refresh()
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "
 "
@@ -54,3 +62,6 @@ augroup vimrc-incsearch-highlight
     autocmd CmdlineEnter /,\? :set hlsearch
     autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
+
+" transparent background:
+" hi Normal guibg=NONE ctermbg=NONE
