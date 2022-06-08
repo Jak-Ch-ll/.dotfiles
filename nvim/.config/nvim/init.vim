@@ -8,14 +8,27 @@ set smartindent
 set ignorecase
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
+    Plug 'ayu-theme/ayu-vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'tpope/vim-surround'
+    Plug 'Raimondi/delimitMate'
+
+    "telescope
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'nvim-telescope/telescope-file-browser.nvim'
 call plug#end()
-" alternative to fzf in nvim: telescope
+
+"telescope config
+lua << EOF
+require('telescope').setup {
+    defaults = {
+    } 
+}
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('file_browser')
+EOF
 
 let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-rust-analyzer']
 
@@ -42,10 +55,10 @@ tnoremap <Esc> <C-\><C-n>
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm(): :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
+" inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? coc#_select_confirm(): :
+      "\ CheckBackspace() ? "\<TAB>" :
+      "\ coc#refresh()
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "
 "
