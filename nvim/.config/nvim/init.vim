@@ -1,31 +1,52 @@
-set scrolloff=10
-set number
-set relativenumber
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
+set scrolloff=10
 set smartindent
+set number
+set relativenumber
+set hidden
+set noerrorbells
+set exrc
+
+
+" experimental
+set nowrap
 set ignorecase
+set smartcase
+set noshowmode
+"set completeopt=menuone,noinsert,noselect,preview
+set completeopt=menuone,noinsert,noselect
+set signcolumn=number
+set colorcolumn=80
+set cmdheight=2
+
+
+set laststatus=3
+highlight WinSeparator guibg=None
 
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
-Plug 'preservim/nerdcommenter'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'ayu-theme/ayu-vim'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'simrat39/rust-tools.nvim'
+    Plug 'nvim-lua/completion-nvim'
+    Plug 'tpope/vim-surround'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
-" alternative to fzf in nvim: telescope
 
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-rust-analyzer']
-
-" nerdcommenter
-filetype plugin on
-let g:NERDSpaceDelims = 1
-let g:NERDCreateDefaultMappings = 0
-nnoremap <leader>c<space> :call nerdcommenter#Comment('n', 'toggle')<CR>
-vnoremap <leader>c<space> :call nerdcommenter#Comment('v', 'toggle')<CR>
+" luafile ./plugins/lsp_config.lua
+" lsp
+" lua require'lspconfig'.rust_analyzer.setup({})
+lua require('rust-tools').setup{on_attach=completion_callback}
+lua require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+sign define LspDiagnosticsSignError text=🔴
+sign define LspDiagnosticsSignWarning text=🟠
+sign define LspDiagnosticsSignInformation text=🔵
+sign define LspDiagnosticsSignHint text=🟢
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
 
 " color scheme
 set termguicolors
@@ -33,35 +54,15 @@ let ayucolor="dark" "alt: mirage
 colorscheme ayu
 " alt color schemes: gruvbox, monokai, Dracula, purple
 
-" remaps
-let mapleader = " "
-nnoremap <leader>pv :Vex<CR>
-nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <leader>pf :Files<CR>
-nnoremap <C-j> :cnext<CR>
-nnoremap <C-k> :cprev<CR>
 
-" terminal - leave insert mode
-tnoremap <Esc> <C-\><C-n>
-
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-      " \ pumvisible() ? coc#_select_confirm(): :
-      " \ CheckBackspace() ? "\<TAB>" :
-      " \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-"
-augroup vimrc-incsearch-highlight
+" remove search highlight after searching
+augroup nohl-after-search
     autocmd!
-    autocmd CmdlineEnter /,\? :set hlsearch
-    autocmd CmdlineLeave /,\? :set nohlsearch
+    autocmd CmdlineLeave /,\? :nohl
 augroup END
 
-" transparent background:
-" hi Normal guibg=NONE ctermbg=NONE
+" remaps
+let mapleader = " "
+nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+
