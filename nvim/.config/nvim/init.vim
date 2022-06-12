@@ -1,42 +1,86 @@
-set scrolloff=10
-set number
-set relativenumber
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
+set scrolloff=10
 set smartindent
+set number
+set relativenumber
+set hidden
+set noerrorbells
+set exrc
+set splitright
+
+"experimental
 set ignorecase
+set smartcase
+set noshowmode
+set signcolumn=yes
+
+"split window
+set laststatus=3
+highlight WinSeparator guibg=None
+
+
 
 call plug#begin('~/.vim/plugged')
+    "Themes
     Plug 'ayu-theme/ayu-vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'olimorris/onedarkpro.nvim'
+
     Plug 'tpope/vim-surround'
     Plug 'Raimondi/delimitMate'
+    Plug 'Yggdroot/indentLine'
+
+    "lualine
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'nvim-lualine/lualine.nvim'
 
     "telescope
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope-file-browser.nvim'
+
+    "lsp
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'simrat39/rust-tools.nvim'
 call plug#end()
 
-"telescope config
-lua << EOF
-require('telescope').setup {
-    defaults = {
-    } 
-}
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('file_browser')
-EOF
+"load config files from ./lua/
+lua require("telescope_config")
+lua require("lsp_config")
+lua require("devicons_config")
+lua require("lualine_config")
 
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-rust-analyzer']
+"IndentLine
+let g:indentLine_char = '│'
 
 " color scheme
 set termguicolors
 let ayucolor="dark" "alt: mirage
-colorscheme ayu
+" colorscheme ayu
 " alt color schemes: gruvbox, monokai, Dracula, purple
+"
+lua << EOF
+local onedarkpro = require("onedarkpro")
+onedarkpro.setup({
+    dark_theme = "onedark_dark",
+    styles = {
+        comments = "italic",
+        keywords = "bold"
+    },
+    options = {
+        undercurl = true
+    }
+})
+onedarkpro.load()
+EOF
 
 " remaps
 let mapleader = " "
@@ -46,22 +90,14 @@ nnoremap <C-p> :GFiles<CR>
 nnoremap <leader>pf :Files<CR>
 nnoremap <C-j> :cnext<CR>
 nnoremap <C-k> :cprev<CR>
+nnoremap <A-w> :bd<CR>
+nnoremap <Tab> :bnext<CR>:redraw<CR>:ls<CR>
+nnoremap <S-Tab> :bprevious<CR>:redraw<CR>:ls<CR>
+nnoremap <C-p> :Telescope find_files<CR>
 
 " terminal - leave insert mode
 tnoremap <Esc> <C-\><C-n>
 
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-      "\ pumvisible() ? coc#_select_confirm(): :
-      "\ CheckBackspace() ? "\<TAB>" :
-      "\ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-"
 augroup vimrc-incsearch-highlight
     autocmd!
     autocmd CmdlineEnter /,\? :set hlsearch
