@@ -123,7 +123,7 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH=~/.local/bin:$PATH
 alias vim=nvim
-alias vc="nvim ~/.config/nvim/init.vim"
+alias vc="nvim ~/.config/nvim/"
 
 # CS50
 export CC="clang"
