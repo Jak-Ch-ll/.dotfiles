@@ -76,7 +76,8 @@ onedarkpro.setup({
         keywords = "bold"
     },
     options = {
-        undercurl = true
+        undercurl = true,
+        transparency = true
     }
 })
 onedarkpro.load()
