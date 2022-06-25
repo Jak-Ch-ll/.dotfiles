@@ -16,7 +16,7 @@ local on_attach = function()
    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, bufopts)
 end
 
-local servers = { "tsserver" }
+local servers = { "tsserver", "gopls" }
   -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -35,6 +35,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     callback = vim.lsp.buf.formatting
 })
 
+-- rust
 require('rust-tools').setup({
     server = {
         capabilities = capabilities,
