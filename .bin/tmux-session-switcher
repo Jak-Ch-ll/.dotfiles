@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+session=$(tmux ls -F '#{session_name}' 2> /dev/null | fzf)
+
+if [[ -z "$session" ]]; then
+    exit 1
+fi
+
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t "$session"
+else
+    tmux switch-client -t "$session"
+fi
+
