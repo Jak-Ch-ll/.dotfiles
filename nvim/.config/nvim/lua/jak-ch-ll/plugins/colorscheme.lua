@@ -14,7 +14,7 @@ local ayu = {
     'ayu-theme/ayu-cim',
     config = function()
         vim.g.ayucolor = 'dark', -- alt: mirage
-        vim.cmd('colorscheme ayu')
+            vim.cmd('colorscheme ayu')
     end
 }
 

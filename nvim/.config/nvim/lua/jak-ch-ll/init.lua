@@ -1,15 +1,15 @@
-require "jak-ch-ll/plugins/packer"
+require "jak-ch-ll/plugins"
 require "jak-ch-ll/lsp"
 
-local augroup = vim.api.nvim_create_augroup("general", { clear = true }),
+local augroup = vim.api.nvim_create_augroup("general", { clear = true })
 
 -- autosource config files
 vim.api.nvim_create_autocmd(
     "BufWritePost",
     {
-        command = "source <afile>",
         group = augroup,
-        pattern = "*.lua"
+        pattern = "*.lua",
+        command = "source <afile>"
     }
 )
 
@@ -18,11 +18,11 @@ vim.o.relativenumber = true
 vim.o.number = true
 
 vim.o.tabstop = 4
-vim.o.softtabstop= 4
-vim.o.shiftwidth= 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
-vim.o.splitright = true
+--vim.o.splitright = true
 vim.o.splitbelow = true
 
 vim.o.scrolloff = 10
@@ -58,31 +58,28 @@ vim.keymap.set("n", "<A-w>", ":bd<CR>")
 vim.keymap.set("n", "<Tab>", ":bnext<CR>:redraw<CR>:ls<CR>")
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>:redraw<CR>:ls<CR>")
 
+vim.keymap.set("n", "<C-s>", ":silent !tmux neww tmux-session-switcher<CR>")
+vim.keymap.set("n", "<A-s>", ":silent !tmux neww tmux-session-creator<CR>")
+
 -- terminal - leave insert mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
--- TODO hightlight only on search
---[[
-augroup vimrc-incsearch-highlight
-    autocmd!
-    autocmd CmdlineEnter /,\? :set hlsearch
-    autocmd CmdlineLeave /,\? :set nohlsearch
-augroup END
-]]
+-- resource configs
+vim.keymap.set('n', '<leader><CR>', ':so ~/.config/nvim/init.lua<CR>')
 
---[[
 vim.api.nvim_create_autocmd(
     "CmdlineEnter",
     {
         group = augroup,
-        command = ":set hlsearch"
+        pattern = '/,?',
+        command = ':set hlsearch'
     }
 )
 vim.api.nvim_create_autocmd(
     "CmdlineLeave",
     {
-        group = augroup,
-        command ":set nohlsearch"
+        group   = augroup,
+        pattern = '/,?',
+        command = ':set nohlsearch'
     }
 )
-]]

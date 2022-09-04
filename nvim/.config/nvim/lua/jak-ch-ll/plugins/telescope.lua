@@ -6,7 +6,7 @@ return {
         { "nvim-telescope/telescope-file-browser.nvim" }
     },
     config = function()
-        require('telescope').setup{
+        require('telescope').setup {
             defaults = {
                 mappings = {
                     -- mappings for insert mode in telescope view
@@ -16,7 +16,7 @@ return {
                         ["<C-h>"] = function() print("Hello, world!") end
                     }
                 }
-            } 
+            }
         }
         require('telescope').load_extension('fzf')
         require('telescope').load_extension('file_browser')
