@@ -133,3 +133,5 @@ export LDLIBS="-lcrypt -lcs50 -lm"
 # Go
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
+
+export PATH=$PATH:~/.dotfiles/.bin
