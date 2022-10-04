@@ -1,1 +1,5 @@
-require "jak-ch-ll"
+require "jak-ch-ll/sets"
+require "jak-ch-ll/keybinds"
+require "jak-ch-ll/autocmds"
+require "jak-ch-ll/plugins"
+require "jak-ch-ll/lsp"
