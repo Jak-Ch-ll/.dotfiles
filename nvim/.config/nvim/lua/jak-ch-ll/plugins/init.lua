@@ -55,7 +55,18 @@ return require('packer').startup({
                 'williamboman/mason.nvim',
                 'williamboman/mason-lspconfig.nvim',
                 "b0o/schemastore.nvim",
-                'jose-elias-alvarez/typescript.nvim'
+                'jose-elias-alvarez/typescript.nvim',
+                'lvimuser/lsp-inlayhints.nvim'
+            }
+        }
+
+        -- dap
+        use {
+            'mfussenegger/nvim-dap',
+            requires = {
+                "mxsdev/nvim-dap-vscode-js",
+                'theHamsta/nvim-dap-virtual-text',
+                "rcarriga/nvim-dap-ui"
             }
         }
 
