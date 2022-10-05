@@ -3,18 +3,26 @@
 local tokyonight = {
     'folke/tokyonight.nvim',
     config = function()
-        vim.g.tokyonight_transparent_sidebar = true
-        vim.g.tokyonight_transparent = true
-        vim.o.background = 'dark'
+        require('tokyonight').setup({
+            style = 'night',
+            transparent = true,
+            styles = {
+                sidebars = 'transparent',
+                comments = { italic = true }
+            }
+        })
+        -- vim.g.tokyonight_transparent_sidebar = true
         vim.cmd("colorscheme tokyonight")
     end
 }
 
+local hello
+
 local ayu = {
     'ayu-theme/ayu-cim',
     config = function()
-        vim.g.ayucolor = 'dark', -- alt: mirage
-            vim.cmd('colorscheme ayu')
+        vim.g.ayucolor = 'dark' -- alt: mirage
+        vim.cmd('colorscheme ayu')
     end
 }
 

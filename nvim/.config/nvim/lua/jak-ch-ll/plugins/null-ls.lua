@@ -12,7 +12,11 @@ return {
             sources = {
                 -- js
                 formatting.prettier,
-                diagnostics.eslint_d
+                diagnostics.eslint_d.with({
+                    condition = function(utils)
+                        return utils.root_has_file({ ".eslintrc.cjs" })
+                    end,
+                })
             },
             --on_attach = function(client, bufnr)
             --    if client.supports_method("textDocument/formatting") then
@@ -33,4 +37,5 @@ return {
             --end
         })
     end,
+    requires = { "nvim-lua/plenary.nvim" },
 }

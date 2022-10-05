@@ -1,22 +1,5 @@
 require('jak-ch-ll/lsp/mason')
 
--- Neovim 7:
---local function enable_format_on_save(client)
---    if client.supports_method("textDocument/formatting") then
---        local augroup = vim.api.nvim_create_augroup('on-save', { clear = true })
---        vim.api.nvim_create_autocmd('BufWritePre', {
---            group = augroup,
---            callback = function()
---                print('formatting!')
---                vim.lsp.buf.formatting_seq_sync({
---                    order = { 'null-ls', 'rust_analyzer' }
---                })
---            end
---        })
---    end
---end
-
--- Neovim 8:
 local function enable_format_on_save(client)
     if client.supports_method('textDocument/formatting') then
         local augroup = vim.api.nvim_create_augroup('on-save', { clear = true })
@@ -63,6 +46,7 @@ local servers = {
             filetypes = { 'html', 'svelte' }
         }
     },
+    emmet_ls = {},
     cssls = {},
     jsonls = {
         config = {
@@ -85,7 +69,7 @@ local servers = {
                     runtime = {
                         version = 'LuaJIT',
                     },
-                    diagnostic = {
+                    diagnostics = {
                         globals = { 'vim' },
                     },
                     workspace = {
