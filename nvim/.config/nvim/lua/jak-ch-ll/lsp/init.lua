@@ -58,7 +58,11 @@ local servers = {
             }
         }
     },
-    tailwindcss = {},
+    tailwindcss = {
+        config = {
+            root_dir = require('lspconfig').util.root_pattern('tailwind.config.js')
+        }
+    },
     gopls = {},
     dockerls = {},
     yamlls = {},
