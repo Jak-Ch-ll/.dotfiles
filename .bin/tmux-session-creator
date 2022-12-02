@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-session=$(find ~ ~/learning ~/projects -mindepth 1 -maxdepth 1 -type d | fzf)
+session=$(find ~ ~/learning ~/projects ~/repos -mindepth 1 -maxdepth 1 -type d | fzf)
 
 if [[ -z "$session" ]]; then
     exit 1
