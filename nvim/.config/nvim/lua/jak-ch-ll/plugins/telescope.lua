@@ -21,7 +21,21 @@ return {
         require('telescope').load_extension('fzf')
         require('telescope').load_extension('file_browser')
 
-        vim.keymap.set("n", "<C-p>", ":Telescope find_files<CR>")
+        vim.keymap.set("n", "<C-p>", function()
+            local tb = require('telescope.builtin')
+
+            vim.fn.system('git rev-parse --is-inside-work-tree')
+
+            print("Error: ", vim.v.shell_error)
+
+            if vim.v.shell_error == 0 then
+                tb.git_files({
+                    show_untracked = true
+                })
+            else
+                tb.find_files()
+            end
+        end)
         vim.keymap.set('n', '<C-j>', ':cnext<CR>')
         vim.keymap.set('n', '<C-k>', ':cprev<CR>')
     end
