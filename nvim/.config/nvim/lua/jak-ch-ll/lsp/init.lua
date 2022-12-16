@@ -127,7 +127,14 @@ require('rust-tools').setup({
 require('typescript').setup({
     server = {
         capabilities = capabilities,
-        on_attach = shared_on_attach
+        on_attach = shared_on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy"
+                }
+            }
+        }
     }
 })
 
