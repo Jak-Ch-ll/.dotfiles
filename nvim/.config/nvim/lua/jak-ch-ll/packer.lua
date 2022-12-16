@@ -12,12 +12,49 @@ return require('packer').startup({
         -- packer manages itself
         use 'wbthomason/packer.nvim'
 
-        use(require('jak-ch-ll/plugins/colorscheme'))
-        use(require('jak-ch-ll/plugins/lualine'))
-        use(require('jak-ch-ll/plugins/telescope'))
-        use(require('jak-ch-ll/plugins/null-ls'))
-        use(require('jak-ch-ll/plugins/treesitter'))
-        use(require('jak-ch-ll/plugins/nvim-tree'))
+        -- colorschemes
+        use({ 'folke/tokyonight.nvim' })
+        use({ 'ayu-theme/ayu-vim' })
+        use 'olimorris/onedarkpro.nvim'
+
+        use({
+            'kyazdani42/nvim-tree.lua',
+            requires = {
+                'kyazdani42/nvim-web-devicons',
+            },
+        })
+
+        use({
+            'nvim-telescope/telescope.nvim',
+            requires = {
+                { 'nvim-lua/plenary.nvim' },
+                { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+                { "nvim-telescope/telescope-file-browser.nvim" }
+            },
+        })
+
+        use({ 'jose-elias-alvarez/null-ls.nvim',
+            requires = { "nvim-lua/plenary.nvim" },
+        })
+
+        use({
+            'nvim-treesitter/nvim-treesitter',
+            run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+        })
+
+        use({
+            'nvim-lualine/lualine.nvim',
+            requires = {
+                'kyazdani42/nvim-web-devicons',
+                opt = true,
+                config = function()
+                    require('nvim-web-devicons').setup {
+                        default = true,
+                        icons_enabled = true
+                    }
+                end
+            },
+        })
 
         use 'tpope/vim-surround'
         use 'Raimondi/delimitMate'

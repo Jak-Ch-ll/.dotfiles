@@ -1,6 +1,6 @@
 require "jak-ch-ll/sets"
 require "jak-ch-ll/keybinds"
 require "jak-ch-ll/autocmds"
-require "jak-ch-ll/plugins"
+require "jak-ch-ll/packer"
 require "jak-ch-ll/lsp"
 require "jak-ch-ll/dap"
