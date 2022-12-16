@@ -12,6 +12,7 @@ return {
                 enable = true
             },
             view = {
+                width = '30%',
                 side = 'right',
                 number = true,
                 relativenumber = true,
@@ -20,7 +21,7 @@ return {
                         { key = 'l', action = 'preview' },
                         { key = 'h', action = 'close_node' }
                     }
-                }
+                },
             }
         })
 
