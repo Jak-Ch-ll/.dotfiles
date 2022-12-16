@@ -6,7 +6,11 @@ return {
         { "nvim-telescope/telescope-file-browser.nvim" }
     },
     config = function()
-        require('telescope').setup {
+        local telescope = require('telescope')
+        local actions = require('telescope.actions')
+        local action_state = require('telescope.actions.state')
+
+        telescope.setup {
             defaults = {
                 mappings = {
                     -- mappings for insert mode in telescope view
@@ -16,10 +20,19 @@ return {
                         ["<C-h>"] = function() print("Hello, world!") end
                     }
                 }
+            },
+            pickers = {
+                buffers = {
+                    mappings = {
+                        n = {
+                            ["x"] = actions.delete_buffer
+                        }
+                    }
+                }
             }
         }
-        require('telescope').load_extension('fzf')
-        require('telescope').load_extension('file_browser')
+        telescope.load_extension('fzf')
+        telescope.load_extension('file_browser')
 
         vim.keymap.set("n", "<C-p>", function()
             local tb = require('telescope.builtin')
@@ -38,6 +51,6 @@ return {
         end)
         vim.keymap.set('n', '<C-j>', ':cnext<CR>')
         vim.keymap.set('n', '<C-k>', ':cprev<CR>')
-        vim.keymap.set('n', '<leader>tb', ':Telescope buffers<CR>')
+        vim.keymap.set('n', '<leader>b', ':Telescope buffers<CR>')
     end
 }
