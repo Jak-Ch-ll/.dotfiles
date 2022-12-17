@@ -17,7 +17,6 @@ vim.g.ayucolor = 'dark' -- alt: mirage
 -- COLORSCHEME: onedarkpro
 local onedarkpro = require("onedarkpro")
 require("onedarkpro").setup({
-    dark_theme = "onedark_dark",
     styles = {
         comments = "italic",
         keywords = "bold"

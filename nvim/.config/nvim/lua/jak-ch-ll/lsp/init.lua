@@ -87,9 +87,18 @@ local servers = {
         }
     },
 }
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- Setup cmp_nvim_lsp
+require 'cmp'.setup {
+    sources = {
+        { name = 'nvim_lsp' }
+    }
+}
+-- var needed for language setups
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+
+-- Setup lspconfig.
 local lspconfig = require('lspconfig')
 
 for server, server_settings in pairs(servers) do
