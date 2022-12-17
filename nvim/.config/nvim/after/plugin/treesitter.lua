@@ -5,8 +5,10 @@ require('nvim-treesitter.configs').setup({
         'typescript',
         'javascript',
         'css',
+        'scss',
         'html',
-        'svelte'
+        'svelte',
+        'jsdoc',
     },
     sync_install = false,
     auto_install = true,
