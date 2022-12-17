@@ -12,38 +12,35 @@ return require('packer').startup({
         -- packer manages itself
         use 'wbthomason/packer.nvim'
 
-        -- colorschemes
-        use({ 'folke/tokyonight.nvim' })
-        use({ 'ayu-theme/ayu-vim' })
-        use 'olimorris/onedarkpro.nvim'
+        use 'tpope/vim-surround'
+        use 'Raimondi/delimitMate'
+        use 'lukas-reineke/indent-blankline.nvim'
+        use 'stephenway/postcss.vim'
+        use 'lewis6991/gitsigns.nvim'
 
-        use({
-            'kyazdani42/nvim-tree.lua',
+        use { 'kyazdani42/nvim-tree.lua',
             requires = {
                 'kyazdani42/nvim-web-devicons',
             },
-        })
+        }
 
-        use({
-            'nvim-telescope/telescope.nvim',
+        use { 'nvim-telescope/telescope.nvim',
             requires = {
                 { 'nvim-lua/plenary.nvim' },
                 { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
                 { "nvim-telescope/telescope-file-browser.nvim" }
             },
-        })
+        }
 
-        use({ 'jose-elias-alvarez/null-ls.nvim',
+        use { 'jose-elias-alvarez/null-ls.nvim',
             requires = { "nvim-lua/plenary.nvim" },
-        })
+        }
 
-        use({
-            'nvim-treesitter/nvim-treesitter',
-            run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-        })
+        use { 'nvim-treesitter/nvim-treesitter',
+            run = function() require('nvim-treesitter.install').update({ with_sync = true })() end,
+        }
 
-        use({
-            'nvim-lualine/lualine.nvim',
+        use { 'nvim-lualine/lualine.nvim',
             requires = {
                 'kyazdani42/nvim-web-devicons',
                 opt = true,
@@ -54,33 +51,10 @@ return require('packer').startup({
                     }
                 end
             },
-        })
-
-        use 'tpope/vim-surround'
-        use 'Raimondi/delimitMate'
-        use 'lukas-reineke/indent-blankline.nvim'
-        use 'stephenway/postcss.vim'
-        use { 'lewis6991/gitsigns.nvim',
-            config = function()
-                require('gitsigns').setup({
-                    signs = {
-                        add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                        change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr",
-                            linehl = "GitSignsChangeLn" },
-                        delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr",
-                            linehl = "GitSignsDeleteLn" },
-                        topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr",
-                            linehl = "GitSignsDeleteLn" },
-                        changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr",
-                            linehl = "GitSignsChangeLn" },
-                    },
-                })
-            end
         }
 
         -- lsp
-        use {
-            'neovim/nvim-lspconfig',
+        use { 'neovim/nvim-lspconfig',
             requires = {
                 'hrsh7th/nvim-cmp',
                 'hrsh7th/cmp-nvim-lsp',
@@ -98,14 +72,18 @@ return require('packer').startup({
         }
 
         -- dap
-        use {
-            'mfussenegger/nvim-dap',
+        use { 'mfussenegger/nvim-dap',
             requires = {
                 "mxsdev/nvim-dap-vscode-js",
                 'theHamsta/nvim-dap-virtual-text',
                 "rcarriga/nvim-dap-ui"
             }
         }
+
+        -- colorschemes
+        use 'folke/tokyonight.nvim'
+        use 'ayu-theme/ayu-vim'
+        use 'olimorris/onedarkpro.nvim'
 
         -- sync packer after install
         if packer_bootstrap then
