@@ -5,6 +5,12 @@ local function buf_number()
     return current_buf .. ': '
 end
 
+local function is_empty(str)
+    if (str == nil or str == '') then return true end
+
+    return false
+end
+
 local function current_folder()
     local path = vim.api.nvim_buf_get_name(0)
 
@@ -12,13 +18,13 @@ local function current_folder()
 
     path = path:gsub(filename_matcher, '')
 
-    if (path == nil or path == '') then return '' end
+    if (is_empty(path)) then return '' end
 
     local foldername = string.match(path, '[^/]+$')
 
+    if (is_empty(foldername)) then return '' end
+
     return '(' .. foldername .. ') '
-
-
 end
 
 function custom_filename:update_status()
