@@ -120,9 +120,14 @@ end
 require('rust-tools').setup({
     server = {
         capabilities = capabilities,
-        on_attach = function(client, bufnr)
-            shared_on_attach(client, bufnr)
-        end,
+        on_attach = shared_on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy"
+                }
+            }
+        }
     },
     tools = {
         inlay_hints = {
@@ -137,13 +142,6 @@ require('typescript').setup({
     server = {
         capabilities = capabilities,
         on_attach = shared_on_attach,
-        settings = {
-            ["rust-analyzer"] = {
-                checkOnSave = {
-                    command = "clippy"
-                }
-            }
-        }
     }
 })
 
