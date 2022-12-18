@@ -22,6 +22,10 @@ return require('packer').startup({
                 use 'JoosepAlviste/nvim-ts-context-commentstring'
             }
         }
+        use { 'ThePrimeagen/harpoon',
+            requires = { 'nvim-lua/plenary.nvim' }
+        }
+
 
 
         use { 'kyazdani42/nvim-tree.lua',
