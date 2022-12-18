@@ -10,6 +10,19 @@ telescope.setup {
                 -- ["<C-h>"] = "which_key",
                 ["<C-h>"] = function() print("Hello, world!") end
             }
+        },
+        vimgrep_arguments = {
+            -- default
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+
+            -- custom changes
+            "--hidden"
         }
     },
     pickers = {
@@ -20,14 +33,24 @@ telescope.setup {
                 }
             }
         }
+
     }
 }
 telescope.load_extension('fzf')
 telescope.load_extension('file_browser')
+telescope.load_extension('harpoon')
 
-vim.keymap.set("n", "<C-p>", function()
-    local tb = require('telescope.builtin')
+local tb = require('telescope.builtin')
 
+local nmap = function(keys, func, desc)
+    if desc then
+        desc = 'Telescope: ' .. desc
+    end
+
+    vim.keymap.set('n', keys, func, { desc = desc })
+end
+
+local function custom_find_files()
     vim.fn.system('git rev-parse --is-inside-work-tree')
 
     print("Error: ", vim.v.shell_error)
@@ -39,7 +62,25 @@ vim.keymap.set("n", "<C-p>", function()
     else
         tb.find_files()
     end
-end)
-vim.keymap.set('n', '<C-j>', ':cnext<CR>')
-vim.keymap.set('n', '<C-k>', ':cprev<CR>')
-vim.keymap.set('n', '<leader>b', ':Telescope buffers<CR>')
+end
+
+nmap('<C-p>', custom_find_files, '[C-p] Project files')
+nmap('<leader>/', function()
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = false,
+    })
+end, '[/] Fuzzily search in current buffer]')
+nmap('<leader>b', tb.buffers, '[B]uffers')
+
+nmap('<leader>sh', tb.help_tags, '[S]earch [H]elp')
+nmap('<leader>sw', tb.grep_string, '[S]earch current [W]ord')
+nmap('<leader>sg', tb.live_grep, '[S]earch by [G]rep')
+nmap('<leader>sd', tb.diagnostics, '[S]earch [D]iagnostics')
+nmap('<leader>sk', tb.keymaps, '[S]earch [K]eymaps')
+
+-- diagnostics
+nmap("<leader>dn", vim.diagnostic.goto_next, '[D]iagnostics [N]ext')
+nmap("<leader>dp", vim.diagnostic.goto_prev, '[D]iagnostics [P]revious')
+nmap("<leader>dl", tb.diagnostics, '[D]iagnostics [L]ist')
+nmap('<leader>dh', vim.diagnostic.open_float, '[D]iagnostics [H]over')
