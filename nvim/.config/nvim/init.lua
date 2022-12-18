@@ -1,5 +1,5 @@
 require "jak-ch-ll/sets"
-require "jak-ch-ll/keybinds"
+require "jak-ch-ll/keymaps"
 require "jak-ch-ll/autocmds"
 require "jak-ch-ll/packer"
 -- require "jak-ch-ll/lsp"
