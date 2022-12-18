@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd(
     "BufWritePost",
     {
         group = augroup,
-        pattern = "*.lua",
+        pattern = "*/nvim/*.lua",
         command = "source <afile>"
     }
 )
