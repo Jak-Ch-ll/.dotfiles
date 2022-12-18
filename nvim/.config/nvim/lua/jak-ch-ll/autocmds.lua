@@ -9,21 +9,3 @@ vim.api.nvim_create_autocmd(
         command = "source <afile>"
     }
 )
-
--- remove search highlight
-vim.api.nvim_create_autocmd(
-    "CmdlineEnter",
-    {
-        group = augroup,
-        pattern = '/,?',
-        command = ':set hlsearch'
-    }
-)
-vim.api.nvim_create_autocmd(
-    "CmdlineLeave",
-    {
-        group   = augroup,
-        pattern = '/,?',
-        command = ':set nohlsearch'
-    }
-)
