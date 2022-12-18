@@ -50,6 +50,9 @@ return require('packer').startup({
 
         use { 'nvim-treesitter/nvim-treesitter',
             run = function() require('nvim-treesitter.install').update({ with_sync = true })() end,
+            requires = {
+                'nvim-treesitter/playground'
+            }
         }
 
         use { 'nvim-lualine/lualine.nvim',
