@@ -13,3 +13,6 @@ vim.keymap.set("n", "<A-s>", ":silent !tmux neww tmux-session-creator<CR>")
 
 -- resource configs
 vim.keymap.set('n', '<leader><CR>', ':so ~/.config/nvim/init.lua<CR>')
+
+-- open urls
+vim.keymap.set('n', 'gx', ':!open <cWORD><CR>')
