@@ -17,6 +17,7 @@ return require('packer').startup({
         use 'lukas-reineke/indent-blankline.nvim'
         use 'stephenway/postcss.vim'
         use 'lewis6991/gitsigns.nvim'
+        use 'tpope/vim-fugitive'
         use { "terrortylor/nvim-comment",
             requires = {
                 use 'JoosepAlviste/nvim-ts-context-commentstring'
