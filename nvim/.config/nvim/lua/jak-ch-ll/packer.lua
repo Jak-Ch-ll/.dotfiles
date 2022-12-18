@@ -69,20 +69,45 @@ return require('packer').startup({
         }
 
         -- lsp
-        use { 'neovim/nvim-lspconfig',
+        -- use { 'neovim/nvim-lspconfig',
+        --     requires = {
+        --         'hrsh7th/nvim-cmp',
+        --         'hrsh7th/cmp-nvim-lsp',
+        --         'hrsh7th/cmp-buffer',
+        --         'hrsh7th/cmp-path',
+        --         'saadparwaiz1/cmp_luasnip',
+        --         'L3MON4D3/LuaSnip',
+        --         'simrat39/rust-tools.nvim',
+        --         'williamboman/mason.nvim',
+        --         'williamboman/mason-lspconfig.nvim',
+        --         "b0o/schemastore.nvim",
+        --         'jose-elias-alvarez/typescript.nvim',
+        --         'lvimuser/lsp-inlayhints.nvim'
+        --     }
+        -- }
+        use {
+            'VonHeikemen/lsp-zero.nvim',
             requires = {
-                'hrsh7th/nvim-cmp',
-                'hrsh7th/cmp-nvim-lsp',
-                'hrsh7th/cmp-buffer',
-                'hrsh7th/cmp-path',
-                'saadparwaiz1/cmp_luasnip',
-                'L3MON4D3/LuaSnip',
-                'simrat39/rust-tools.nvim',
-                'williamboman/mason.nvim',
-                'williamboman/mason-lspconfig.nvim',
-                "b0o/schemastore.nvim",
-                'jose-elias-alvarez/typescript.nvim',
-                'lvimuser/lsp-inlayhints.nvim'
+                -- LSP Support
+                { 'neovim/nvim-lspconfig' },
+                { 'williamboman/mason.nvim' },
+                { 'williamboman/mason-lspconfig.nvim' },
+
+                -- Autocompletion
+                { 'hrsh7th/nvim-cmp' },
+                { 'hrsh7th/cmp-buffer' },
+                { 'hrsh7th/cmp-path' },
+                { 'saadparwaiz1/cmp_luasnip' },
+                { 'hrsh7th/cmp-nvim-lsp' },
+                { 'hrsh7th/cmp-nvim-lua' },
+
+                -- Snippets
+                { 'L3MON4D3/LuaSnip' },
+                { 'rafamadriz/friendly-snippets' },
+
+                -- Custom
+                { 'lvimuser/lsp-inlayhints.nvim' },
+                { "b0o/schemastore.nvim" },
             }
         }
 
