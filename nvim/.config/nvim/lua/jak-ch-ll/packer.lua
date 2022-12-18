@@ -1,10 +1,10 @@
 -- autoinstall packer from Github
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local packer_bootstrap
-if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-        install_path })
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local is_bootstrap = false
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    is_bootstrap = true
+    vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd [[packadd packer.nvim]]
 end
 
 return require('packer').startup({
@@ -126,7 +126,13 @@ return require('packer').startup({
         use 'olimorris/onedarkpro.nvim'
 
         -- sync packer after install
-        if packer_bootstrap then
+        if is_bootstrap then
+            print '=================================='
+            print '    Plugins are being installed'
+            print '    Wait until Packer completes,'
+            print '       then restart nvim'
+            print '=================================='
+
             require('packer').sync()
         end
     end,
