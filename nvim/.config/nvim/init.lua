@@ -1,6 +1,6 @@
 require "jak-ch-ll/sets"
 require "jak-ch-ll/keymaps"
 require "jak-ch-ll/autocmds"
-require "jak-ch-ll/packer"
+require "jak-ch-ll/lazy"
 -- require "jak-ch-ll/lsp"
 require "jak-ch-ll/dap"
