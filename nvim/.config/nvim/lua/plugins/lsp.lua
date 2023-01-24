@@ -20,6 +20,7 @@ return {
     { import = 'plugins.lsp' },
     {
         'VonHeikemen/lsp-zero.nvim',
+        event = 'VeryLazy',
         dependencies = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
