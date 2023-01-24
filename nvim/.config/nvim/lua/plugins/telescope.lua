@@ -12,8 +12,7 @@ local function custom_find_files()
     end
 end
 
-
-return { 
+return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
@@ -23,7 +22,7 @@ return {
     keys = {
         { '<C-p>', custom_find_files, desc = '[C-p] Project files' },
         {
-            '<leader>/', 
+            '<leader>/',
             function()
                 require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
                     winblend = 10,
@@ -33,13 +32,13 @@ return {
             desc = '[/] Fuzzily search in current buffer]'
         },
         { '<leader>b', function() require('telescope.builtin').buffers() end, desc = '[B]uffers' },
-        
+
         { '<leader>sh', function() require('telescope.builtin').help_tags() end, desc = '[S]earch [H]elp' },
         { '<leader>sw', function() require('telescope.builtin').grep_string() end, desc = '[S]earch current [W]ord' },
         { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = '[S]earch by [G]rep' },
         { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = '[S]earch [D]iagnostics' },
         { '<leader>sk', function() require('telescope.builtin').keymaps() end, desc = '[S]earch [K]eymaps' },
-        
+
         -- diagnostics
         { "<leader>dn", vim.diagnostic.goto_next, desc = '[D]iagnostics [N]ext' },
         { "<leader>dp", vim.diagnostic.goto_prev, desc = '[D]iagnostics [P]revious' },
