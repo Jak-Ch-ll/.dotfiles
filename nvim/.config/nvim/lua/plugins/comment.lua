@@ -8,6 +8,7 @@ return {
     dependencies = {
         'JoosepAlviste/nvim-ts-context-commentstring',
     },
+    enabled = false,
     keys = {
         "gcc",
         { "gc", mode = "v" }

@@ -4,27 +4,34 @@ return {
     dependencies = {
         'nvim-treesitter/playground'
     },
-    opts = {
-        ensure_installed = {
-            'lua',
-            'rust',
-            'typescript',
-            'javascript',
-            'css',
-            'scss',
-            'html',
-            'svelte',
-            'jsdoc',
-        },
-        sync_install = false,
-        auto_install = true,
+    init = function()
+        require 'nvim-treesitter.configs'.setup {
+            ensure_installed = {
+                'lua',
+                'rust',
+                'typescript',
+                'javascript',
+                'css',
+                'scss',
+                'html',
+                'svelte',
+                'jsdoc',
+            },
+            sync_install = false,
+            auto_install = true,
 
-        highlight = {
-            enable = true,
-        },
+            highlight = {
+                enable = true,
+            },
 
-        -- indent = {
-        --     enable = true
-        -- },
-    }
+            -- indent = {
+            --     enable = true
+            -- },
+
+            context_commentstring = {
+                enable = true,
+                enable_autocmd = false,
+            }
+        }
+    end,
 }

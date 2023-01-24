@@ -1,7 +1,7 @@
 return {
-    { 'tpope/vim-surround', lazy = false },
-    'Raimondi/delimitMate',
-    'lukas-reineke/indent-blankline.nvim',
+    { 'tpope/vim-surround', event = 'VeryLazy' },
+    { 'lukas-reineke/indent-blankline.nvim', event = 'VeryLazy' },
+    -- 'Raimondi/delimitMate',
     'stephenway/postcss.vim',
 
     -- dap
