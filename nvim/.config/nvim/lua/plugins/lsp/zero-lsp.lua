@@ -17,8 +17,8 @@
 -- }
 
 return {
-    { import = 'plugins.lsp' },
     {
+        enabled = true,
         'VonHeikemen/lsp-zero.nvim',
         event = 'VeryLazy',
         dependencies = {
@@ -55,7 +55,7 @@ return {
             -- CMP
             local cmp = require('cmp')
             local cmp_mappings = lsp.defaults.cmp_mappings({
-                ['<tab>'] = cmp.mapping.confirm({ select = true }),
+                ['<Tab>'] = cmp.mapping.confirm({ select = true }),
                 ['<C-Space>'] = cmp.mapping.complete(),
             })
 

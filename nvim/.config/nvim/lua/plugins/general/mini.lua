@@ -1,6 +1,7 @@
 return {
     'echasnovski/mini.nvim',
     event = 'VeryLazy',
+    lazy = false,
     version = '*',
     dependencies = {
         'JoosepAlviste/nvim-ts-context-commentstring',
@@ -23,5 +24,7 @@ return {
         })
 
         require('mini.ai').setup()
+
+        -- require('mini.starter').setup()
     end,
 }
