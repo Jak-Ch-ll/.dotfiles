@@ -39,12 +39,16 @@ return {
             },
             float = {
                 enable = true,
-                open_win_config = {
-                    col = 100,
-                    row = 0,
-                    height = 100,
-                    border = 'none',
-                },
+                open_win_config = function()
+                    return {
+                        border = 'none',
+                        relative = 'editor',
+                        height = 100,
+                        row = 0,
+                        width = 30,
+                        col = vim.opt.columns:get(),
+                    }
+                end
             }
         },
 
