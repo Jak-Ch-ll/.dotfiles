@@ -1,5 +1,5 @@
 -- Add prefix
-function ap(desc)
+local function ap(desc)
     return 'Harpoon: ' .. desc
 end
 
