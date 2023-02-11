@@ -80,6 +80,12 @@ return {
                             ["x"] = actions.delete_buffer
                         }
                     }
+                },
+                lsp_references = {
+                    theme = 'dropdown',
+                    include_current_line = true,
+                    show_line = false,
+                    trim_text = true,
                 }
 
             }
