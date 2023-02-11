@@ -18,8 +18,6 @@ vim.o.hidden = true
 
 vim.o.errorbells = false
 
-vim.o.showmode = false
-
 vim.o.signcolumn = "yes"
 
 vim.o.lazyredraw = true
@@ -29,6 +27,7 @@ vim.o.termguicolors = true
 -- vim.o.spell = true
 
 vim.o.cmdheight = 0
+-- vim.o.showmode = false
 
 -- split window
 vim.o.laststatus = 3
@@ -52,3 +51,6 @@ vim.o.incsearch = true
 
 vim.o.ignorecase = true
 vim.o.smartcase = true
+
+-- complete
+vim.opt.completeopt = { 'menuone', 'noinsert' }
