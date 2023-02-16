@@ -35,7 +35,7 @@ return {
             mason.setup_handlers({
                 setup_with_options(),
 
-                ["sumneko_lua"] = setup_with_options({
+                ["lua_ls"] = setup_with_options({
                     settings = {
                         Lua = {
                             runtime = {
