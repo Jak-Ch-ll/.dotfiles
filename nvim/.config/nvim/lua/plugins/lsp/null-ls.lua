@@ -14,17 +14,18 @@ return {
 
         local null_ls = require('null-ls')
 
-        require('mason-null-ls').setup_handlers({
-            require('mason-null-ls.automatic_setup'),
-            eslint_d = function()
-                null_ls.register(
-                    null_ls.builtins.diagnostics.eslint_d.with({
-                        condition = function(utils)
-                            return utils.root_has_file({ ".eslintrc.cjs" })
-                        end,
-                    })
-                )
-            end
+        require('mason-null-ls').setup({
+            handlers = {
+                ["eslint_d"] = function()
+                    null_ls.register(
+                        null_ls.builtins.diagnostics.eslint_d.with({
+                            condition = function(utils)
+                                return utils.root_has_file({ ".eslintrc.cjs" })
+                            end,
+                        })
+                    )
+                end,
+            }
         })
 
         null_ls.setup({
