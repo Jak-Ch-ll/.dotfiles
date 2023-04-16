@@ -49,8 +49,9 @@ vim.o.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.o.hlsearch = false
 vim.o.incsearch = true
 
+-- commands
 vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.o.wildmode = 'list:longest'
 
 -- complete
 vim.opt.completeopt = { 'menuone', 'noinsert' }
