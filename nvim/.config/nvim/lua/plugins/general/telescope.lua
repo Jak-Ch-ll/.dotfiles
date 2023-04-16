@@ -23,6 +23,7 @@ return {
     },
     keys = {
         { '<C-p>', custom_find_files, desc = '[C-p] Project files' },
+        { '<leader>sc', function() require('telescope.builtin').commands() end, desc = '[S]earch [C]ommands' },
         {
             '<leader>/',
             function()
