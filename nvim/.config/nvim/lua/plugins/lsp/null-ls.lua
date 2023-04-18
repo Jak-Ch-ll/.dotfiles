@@ -28,6 +28,13 @@ return {
                         null_ls.builtins.code_actions.eslint_d.with(eslint_config)
                     )
                 end,
+                prettier = function()
+                    null_ls.register(
+                        null_ls.builtins.formatting.prettier.with({
+                            extra_filetypes = { "xml" }
+                        })
+                    )
+                end
             }
         })
 
