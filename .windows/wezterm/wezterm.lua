@@ -12,7 +12,7 @@ return {
     default_prog = { "wsl" },
     default_domain = 'WSL:Ubuntu-20.04',
     font = wezterm.font 'FiraCode NF',
-    underline_position = "400%",
+    underline_position = "300%",
     default_cursor_style = 'SteadyBar',
     background = {
         {
