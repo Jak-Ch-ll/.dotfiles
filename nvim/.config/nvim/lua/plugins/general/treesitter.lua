@@ -2,7 +2,11 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = function() require('nvim-treesitter.install').update({ with_sync = true })() end,
     dependencies = {
-        'nvim-treesitter/playground'
+        'nvim-treesitter/playground',
+        {
+            'nvim-treesitter/nvim-treesitter-context',
+            event = 'VeryLazy'
+        }
     },
     init = function()
         require 'nvim-treesitter.configs'.setup {
