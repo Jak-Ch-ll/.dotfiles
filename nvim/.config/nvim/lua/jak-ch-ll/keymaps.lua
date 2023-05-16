@@ -30,7 +30,7 @@ nmap("<A-s>", ":silent !tmux neww tmux-session-creator<CR>")
 -- re-source configs
 nmap('<leader><CR>', ':so ~/.config/nvim/init.lua<CR>')
 
-nmap('gx', ':!open <cWORD><CR>', '[A-w] (Override) Open url')
+nmap('gx', ':!wslview <cfile><CR>', '(Override) Open url')
 
 nmap("J", "mzJ`z", '[J] (Override) Lets cursor stay when using J')
 
