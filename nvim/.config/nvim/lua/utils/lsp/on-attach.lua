@@ -24,7 +24,7 @@ local function shared_on_attach(client, bufnr)
         vim.keymap.set('n', keys, fn, { buffer = bufnr, desc = desc })
     end
 
-    nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
+    -- nmap('<leader>r', vim.lsp.buf.rename, '[R]ename') // moved to inc-rename
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
     nmap('gh', vim.lsp.buf.hover, '[G]oto [H]over documentation')
