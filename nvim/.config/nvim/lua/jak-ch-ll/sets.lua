@@ -12,7 +12,7 @@ vim.o.splitbelow = true
 
 vim.o.scrolloff = 10
 
-vim.o.smartindent = 10
+vim.o.smartindent = true
 
 vim.o.hidden = true
 
