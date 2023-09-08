@@ -13,7 +13,7 @@ return {
 
         config = function()
             local mason = require('mason-lspconfig')
-            local lsp = require('lspconfig')
+            local lspconfig = require('lspconfig')
             local utils = require('utils')
 
             local on_attach = require('utils/lsp/on-attach')
@@ -25,7 +25,7 @@ return {
 
             local function setup_with_options(options)
                 return function(server_name)
-                    lsp[server_name].setup(
+                    lspconfig[server_name].setup(
                         utils.merge(
                             shared_options,
                             options
@@ -112,7 +112,45 @@ return {
                             }
                         }
                     })(server_name)
+
+
+                ['efm'] = function(server_name)
+                    local prettierd = {
+                        formatCommand =
+                        'prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize}',
+                        formatStdin = true,
+                        -- rootMarkers = {
+                        --     '.prettierrc',
+                        --     '.prettierrc.json',
+                        --     '.prettierrc.js',
+                        --     '.prettierrc.yml',
+                        --     '.prettierrc.yaml',
+                        --     '.prettierrc.json5',
+                        --     '.prettierrc.mjs',
+                        --     '.prettierrc.cjs',
+                        --     '.prettierrc.toml',
+                        -- }
+                    }
+
+                    lspconfig.efm.setup({
+                        init_options = { documentFormatting = true },
+                        settings = {
+                            -- rootMarkers = { ".git/" },
+                            languages = {
+                                javascript = { prettierd },
+                                typescript = { prettierd },
+                                yaml = { prettierd },
+                                json = { prettierd },
+                                html = { prettierd },
+                                css = { prettierd },
+                                scss = { prettierd },
+                                xml = { prettierd },
+                            }
+                        },
+                        filetypes = { 'javascript', 'typescript', 'yaml', 'json', 'html', 'css', 'scss', 'xml' }
+                    })
                 end
+
             })
         end
     }
