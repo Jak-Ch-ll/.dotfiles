@@ -112,27 +112,26 @@ return {
                             }
                         }
                     })(server_name)
-
+                end,
 
                 ['efm'] = function(server_name)
                     local prettierd = {
-                        formatCommand =
-                        'prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize}',
+                        formatCommand = 'prettierd ${INPUT}',
                         formatStdin = true,
-                        -- rootMarkers = {
-                        --     '.prettierrc',
-                        --     '.prettierrc.json',
-                        --     '.prettierrc.js',
-                        --     '.prettierrc.yml',
-                        --     '.prettierrc.yaml',
-                        --     '.prettierrc.json5',
-                        --     '.prettierrc.mjs',
-                        --     '.prettierrc.cjs',
-                        --     '.prettierrc.toml',
-                        -- }
+                        rootMarkers = {
+                            '.prettierrc',
+                            '.prettierrc.json',
+                            '.prettierrc.js',
+                            '.prettierrc.yml',
+                            '.prettierrc.yaml',
+                            '.prettierrc.json5',
+                            '.prettierrc.mjs',
+                            '.prettierrc.cjs',
+                            '.prettierrc.toml',
+                        }
                     }
 
-                    lspconfig.efm.setup({
+                    setup_with_options({
                         init_options = { documentFormatting = true },
                         settings = {
                             -- rootMarkers = { ".git/" },
@@ -148,7 +147,7 @@ return {
                             }
                         },
                         filetypes = { 'javascript', 'typescript', 'yaml', 'json', 'html', 'css', 'scss', 'xml' }
-                    })
+                    })(server_name)
                 end
 
             })
