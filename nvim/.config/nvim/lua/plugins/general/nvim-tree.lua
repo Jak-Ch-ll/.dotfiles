@@ -66,7 +66,6 @@ local function on_attach(bufnr)
 
     vim.keymap.set('n', '<Right>', api.node.open.preview, opts('Open Preview'))
     vim.keymap.set('n', '<Left>', api.node.navigate.parent_close, opts('Close Directory'))
-
 end
 
 return {
@@ -77,7 +76,7 @@ return {
     },
 
     keys = {
-        { '<leader>e', ':NvimTreeToggle<CR>', desc = 'Open [E]xplorer' },
+        { '<leader>e', ':NvimTreeToggle<CR>',         desc = 'Open [E]xplorer' },
         { '<leader>E', ':NvimTreeFindFileToggle<CR>', desc = 'Open [E]xplorer with current file' },
     },
 
@@ -104,12 +103,6 @@ return {
             number = true,
             relativenumber = true,
             width = {},
-            mappings = {
-                list = {
-                    { key = 'l', action = 'preview' },
-                    { key = 'h', action = 'close_node' }
-                }
-            },
             float = {
                 enable = true,
                 open_win_config = function()
