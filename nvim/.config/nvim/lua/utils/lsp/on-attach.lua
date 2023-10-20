@@ -1,13 +1,22 @@
 local augroup = vim.api.nvim_create_augroup('format-on-save', { clear = true })
 
-local function enable_format_on_save(client)
+local function enable_format_on_save(client, buffer)
     if client.supports_method('textDocument/formatting') then
         vim.api.nvim_create_autocmd('BufWritePre', {
             group = augroup,
+            buffer = buffer,
             callback = function()
                 vim.lsp.buf.format({
                     filter = function(f_client)
-                        return f_client.name ~= "tsserver"
+                        local exclude = { "tsserver", "jsonls", "volar", "eslint" }
+
+                        for _, server in pairs(exclude) do
+                            if (f_client.name == server) then
+                                return false
+                            end
+                        end
+
+                        return true
                     end
                 })
             end
@@ -60,7 +69,7 @@ local function shared_on_attach(client, bufnr)
     )
 
 
-    enable_format_on_save(client)
+    enable_format_on_save(client, bufnr)
 end
 
 return shared_on_attach
