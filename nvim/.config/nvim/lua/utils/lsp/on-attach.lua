@@ -25,6 +25,8 @@ local function enable_format_on_save(client, buffer)
 end
 
 local function shared_on_attach(client, bufnr)
+    vim.lsp.inlay_hint(bufnr, true)
+
     local function nmap(keys, fn, desc)
         if desc then
             desc = 'LSP: ' .. desc

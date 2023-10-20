@@ -3,6 +3,7 @@
 
 return {
     'lvimuser/lsp-inlayhints.nvim',
+    enabled = false,
     config = function()
         local ih = require('lsp-inlayhints')
 

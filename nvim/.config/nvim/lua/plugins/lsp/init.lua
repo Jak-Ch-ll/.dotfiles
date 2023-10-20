@@ -34,6 +34,11 @@ return {
                 end
             end
 
+            vim.api.nvim_set_hl(0, 'LspInlayHint', { italic = true, fg = "#772277" })
+            vim.api.nvim_create_user_command('ToggleInlayHint', function()
+                vim.lsp.inlay_hint(0)
+            end, {})
+
             -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
             mason.setup_handlers({
                 setup_with_options(),
@@ -57,28 +62,30 @@ return {
                                 enable = false,
                             },
                             hint = {
-                                enable = true
+                                enable = true,
+                                arrayIndex = "Disable"
+
                             }
                         }
                     }
                 }),
 
-                ['rust_analyzer'] = function()
-                    require('rust-tools').setup({
-                        server = utils.merge(
-                            shared_options,
-                            {
-                                settings = {
-                                    ["rust-analyzer"] = {
-                                        checkOnSave = {
-                                            command = "clippy"
-                                        }
-                                    }
-                                }
-                            }
-                        )
-                    })
-                end,
+                -- ['rust_analyzer'] = function()
+                --     require('rust-tools').setup({
+                --         server = utils.merge(
+                --             shared_options,
+                --             {
+                --                 settings = {
+                --                     ["rust-analyzer"] = {
+                --                         checkOnSave = {
+                --                             command = "clippy"
+                --                         }
+                --                     }
+                --                 }
+                --             }
+                --         )
+                --     })
+                -- end,
 
                 ['tsserver'] = function()
                     require('typescript').setup({
@@ -103,6 +110,10 @@ return {
                     })
                 end,
 
+                -- ['volar'] = setup_with_options({
+                --     filetypes = { 'typescript', 'vue' }
+                -- }),
+
                 ['jsonls'] = function(server_name)
                     setup_with_options({
                         settings = {
@@ -113,6 +124,10 @@ return {
                         }
                     })(server_name)
                 end,
+
+                ['emmet_language_server'] = setup_with_options({
+                    filetypes = { 'html', 'css', 'scss', 'javascript', 'typescript', 'vue' }
+                }),
 
                 ['efm'] = function(server_name)
                     local prettierd = {
@@ -138,15 +153,32 @@ return {
                             languages = {
                                 javascript = { prettierd },
                                 typescript = { prettierd },
+                                typescriptreact = { prettierd },
                                 yaml = { prettierd },
                                 json = { prettierd },
+                                jsonc = { prettierd },
                                 html = { prettierd },
                                 css = { prettierd },
                                 scss = { prettierd },
                                 xml = { prettierd },
+                                vue = { prettierd },
+                                markdown = { prettierd },
                             }
                         },
-                        filetypes = { 'javascript', 'typescript', 'yaml', 'json', 'html', 'css', 'scss', 'xml' }
+                        filetypes = {
+                            'javascript',
+                            'typescript',
+                            'typescriptreact',
+                            'yaml',
+                            'json',
+                            'jsonc',
+                            'html',
+                            'css',
+                            'scss',
+                            'xml',
+                            'vue',
+                            'markdown'
+                        }
                     })(server_name)
                 end
 
