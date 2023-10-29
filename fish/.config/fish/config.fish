@@ -21,3 +21,8 @@ set -gx PATH "$HOME/go/bin" $PATH
 
 ## neovim-bob
 set -gx PATH "$HOME/.local/share/neovim/bin" $PATH
+
+# pnpm
+set -gx PNPM_HOME "/home/jchill/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
