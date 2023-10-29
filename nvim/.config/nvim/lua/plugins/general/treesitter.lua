@@ -40,9 +40,18 @@ return {
                 files = { "src/parser.c" }
             }
         }
+        parser_config.prolog = {
+            install_info = {
+                url = 'https://github.com/Rukiza/tree-sitter-prolog',
+                files = { "src/parser.c" },
+            },
+            filetype = "pl"
+        }
+
         vim.filetype.add({
             extension = {
                 io = 'io',
+                pl = 'prolog',
             }
         })
     end,
