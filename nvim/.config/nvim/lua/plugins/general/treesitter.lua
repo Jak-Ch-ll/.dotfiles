@@ -31,5 +31,19 @@ return {
                 enable_autocmd = false,
             }
         }
+
+        -- io stuff
+        local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+        parser_config.io = {
+            install_info = {
+                url = "~/repos/tree-sitter-io",
+                files = { "src/parser.c" }
+            }
+        }
+        vim.filetype.add({
+            extension = {
+                io = 'io',
+            }
+        })
     end,
 }
