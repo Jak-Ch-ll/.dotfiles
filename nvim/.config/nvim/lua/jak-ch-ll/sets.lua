@@ -56,4 +56,4 @@ vim.o.wildmode = 'list:longest'
 -- complete
 vim.opt.completeopt = { 'menuone', 'noinsert' }
 
-vim.opt.conceallevel = 1
+vim.opt.conceallevel = 2
