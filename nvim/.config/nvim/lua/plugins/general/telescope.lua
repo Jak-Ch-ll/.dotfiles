@@ -18,11 +18,11 @@ return {
     cmd = 'Telescope',
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
         { "nvim-telescope/telescope-file-browser.nvim" }
     },
     keys = {
-        { '<C-p>', custom_find_files, desc = '[C-p] Project files' },
+        { '<C-p>',      custom_find_files,                                      desc = '[C-p] Project files' },
         { '<leader>sc', function() require('telescope.builtin').commands() end, desc = '[S]earch [C]ommands' },
         {
             '<leader>/',
@@ -34,19 +34,18 @@ return {
             end,
             desc = '[/] Fuzzily search in current buffer]'
         },
-        { '<leader>b', function() require('telescope.builtin').buffers() end, desc = '[B]uffers' },
-
-        { '<leader>sh', function() require('telescope.builtin').help_tags() end, desc = '[S]earch [H]elp' },
+        { '<leader>b',  function() require('telescope.builtin').buffers() end,     desc = '[B]uffers' },
+        { '<leader>sh', function() require('telescope.builtin').help_tags() end,   desc = '[S]earch [H]elp' },
         { '<leader>sw', function() require('telescope.builtin').grep_string() end, desc = '[S]earch current [W]ord' },
-        { '<leader>sg', function() require('telescope.builtin').live_grep() end, desc = '[S]earch by [G]rep' },
+        { '<leader>sg', function() require('telescope.builtin').live_grep() end,   desc = '[S]earch by [G]rep' },
         { '<leader>sd', function() require('telescope.builtin').diagnostics() end, desc = '[S]earch [D]iagnostics' },
-        { '<leader>sk', function() require('telescope.builtin').keymaps() end, desc = '[S]earch [K]eymaps' },
+        { '<leader>sk', function() require('telescope.builtin').keymaps() end,     desc = '[S]earch [K]eymaps' },
 
         -- diagnostics
-        { "<leader>dn", vim.diagnostic.goto_next, desc = '[D]iagnostics [N]ext' },
-        { "<leader>dp", vim.diagnostic.goto_prev, desc = '[D]iagnostics [P]revious' },
+        { "<leader>dn", vim.diagnostic.goto_next,                                  desc = '[D]iagnostics [N]ext' },
+        { "<leader>dp", vim.diagnostic.goto_prev,                                  desc = '[D]iagnostics [P]revious' },
         { "<leader>dl", function() require('telescope.builtin').diagnostics() end, desc = '[D]iagnostics [L]ist' },
-        { '<leader>dh', vim.diagnostic.open_float, desc = '[D]iagnostics [H]over' },
+        { '<leader>dh', vim.diagnostic.open_float,                                 desc = '[D]iagnostics [H]over' },
     },
     config = function()
         local telescope = require('telescope')
