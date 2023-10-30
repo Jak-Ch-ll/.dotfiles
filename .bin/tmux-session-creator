@@ -1,15 +1,31 @@
 #!/usr/bin/env bash
 
-session=$(find ~ ~/learning ~/projects ~/repos -mindepth 1 -maxdepth 1 -type d | fzf)
+directory=$(find ~ ~/learning ~/projects ~/repos -mindepth 1 -maxdepth 1 -type d | fzf)
 
-if [[ -z "$session" ]]; then
+if [[ -z "$directory" ]]; then
     exit 1
 fi
 
-session_name=$(basename "$session" | tr . _)
+session_name=$(basename "$directory" | tr . _)
+
+# check if in git repo
+if git -C $directory rev-parse 2>/dev/null; then
+    # check if in bare repo
+    if ! $(git -C $directory rev-parse --is-inside-work-tree 2>/dev/null); then
+        worktree=$(git -C $directory worktree list | fzf)
+
+        if [[ -z "$worktree" ]]; then
+            exit 1
+        fi
+
+        directory=${worktree%% *}
+        session_name="$session_name ${worktree##* }"
+    fi
+fi
+
 
 if ! $(tmux has-session -t "$session_name" 2> /dev/null); then
-    tmux new-session -s "$session_name" -c "$session" -d
+    tmux new-session -s "$session_name" -c "$directory" -d
 fi
 
 if [[ -z "$TMUX" ]]; then
