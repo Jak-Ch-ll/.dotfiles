@@ -1,5 +1,6 @@
 return {
     { import = 'plugins.lsp' },
+    { import = 'plugins.dap' },
     { import = 'plugins.general' },
 
     -- Misc
@@ -7,13 +8,4 @@ return {
     { 'lukas-reineke/indent-blankline.nvim', event = 'VeryLazy' },
     -- 'Raimondi/delimitMate',
     'stephenway/postcss.vim',
-
-    -- dap
-    { 'mfussenegger/nvim-dap',
-        dependencies = {
-            "mxsdev/nvim-dap-vscode-js",
-            'theHamsta/nvim-dap-virtual-text',
-            "rcarriga/nvim-dap-ui"
-        }
-    },
 }
