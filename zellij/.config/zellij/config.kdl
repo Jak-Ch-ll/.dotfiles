@@ -8,6 +8,11 @@ keybinds clear-defaults=true {
         // bind "Alt l" { MoveFocusOrTab "Right"; }
         // bind "Alt j" { MoveFocus "Down"; }
         // bind "Alt k" { MoveFocus "Up"; }
+        bind "Ctrl s" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+            }
+        }
     }
     shared_except "normal" "locked" {
         bind "Esc" { SwitchToMode "normal"; }
