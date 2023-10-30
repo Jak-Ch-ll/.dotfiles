@@ -20,7 +20,7 @@ vim.o.errorbells = false
 
 vim.o.signcolumn = "yes"
 
-vim.o.lazyredraw = true
+-- vim.o.lazyredraw = true
 
 vim.o.termguicolors = true
 
