@@ -3,19 +3,19 @@ return {
     name = 'Treesitter',
     build = function() require('nvim-treesitter.install').update({ with_sync = true })() end,
     dependencies = {
-        {
-
-            'nvim-treesitter/playground',
-            cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor', 'TSHighlightCapturesUnderCursor' },
-        },
+        -- {
+        --
+        --     'nvim-treesitter/playground',
+        --     cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor', 'TSHighlightCapturesUnderCursor' },
+        -- },
         {
             'nvim-treesitter/nvim-treesitter-context',
             event = 'VeryLazy'
         }
     },
     init = function()
+        ---@diagnostic disable-next-line: missing-fields
         require 'nvim-treesitter.configs'.setup {
-            sync_install = false,
             auto_install = true,
 
             highlight = {
