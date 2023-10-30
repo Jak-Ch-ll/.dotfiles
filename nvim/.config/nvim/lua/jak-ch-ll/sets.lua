@@ -55,3 +55,5 @@ vim.o.wildmode = 'list:longest'
 vim.opt.completeopt = { 'menuone', 'noinsert' }
 
 vim.opt.conceallevel = 2
+
+vim.o.textwidth = 80
