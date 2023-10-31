@@ -26,3 +26,7 @@ set PATH "$HOME/.local/share/bob/nvim-bin" $PATH
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
+# Neovim as default editor
+set -gx EDITOR nvim
+
