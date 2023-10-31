@@ -2,6 +2,7 @@
 {
   imports = [
     ./apps/git.nix
+    ./apps/fzf.nix
     ./apps/neovim.nix
   ];
 
@@ -63,6 +64,22 @@
   #
   #  /etc/profiles/per-user/j/etc/profile.d/hm-session-vars.sh
   #
+
+  programs.fish.enable = true;
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    };
+  programs.zellij = {
+    enable = true;
+    settings = {
+      default_shell = "fish";
+        };
+      };
+
+  programs.tmux = {
+    enable = true;
+    shell = "${pkgs.fish}/bin/fish";
   };
 
   # Let Home Manager install and manage itself.
