@@ -8,10 +8,8 @@ return {
         --     'nvim-treesitter/playground',
         --     cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor', 'TSHighlightCapturesUnderCursor' },
         -- },
-        {
-            'nvim-treesitter/nvim-treesitter-context',
-            event = 'VeryLazy'
-        }
+        'nvim-treesitter/nvim-treesitter-context',
+        'windwp/nvim-ts-autotag'
     },
     init = function()
         ---@diagnostic disable-next-line: missing-fields
@@ -24,6 +22,10 @@ return {
 
             indent = {
                 enable = true
+            },
+
+            autotag = {
+                enable = true,
             },
 
             context_commentstring = {
