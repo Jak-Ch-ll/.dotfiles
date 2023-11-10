@@ -54,6 +54,7 @@ return {
             extension = {
                 io = 'io',
                 pl = 'prolog',
+                mdx = 'markdown'
             }
         })
     end,
