@@ -128,60 +128,6 @@ return {
                 ['emmet_language_server'] = setup_with_options({
                     filetypes = { 'html', 'css', 'scss', 'javascript', 'typescript', 'vue' }
                 }),
-
-                ['efm'] = function(server_name)
-                    local prettierd = {
-                        formatCommand = 'prettierd ${INPUT}',
-                        formatStdin = true,
-                        rootMarkers = {
-                            '.prettierrc',
-                            '.prettierrc.json',
-                            '.prettierrc.js',
-                            '.prettierrc.yml',
-                            '.prettierrc.yaml',
-                            '.prettierrc.json5',
-                            '.prettierrc.mjs',
-                            '.prettierrc.cjs',
-                            '.prettierrc.toml',
-                        }
-                    }
-
-                    setup_with_options({
-                        init_options = { documentFormatting = true },
-                        settings = {
-                            -- rootMarkers = { ".git/" },
-                            languages = {
-                                javascript = { prettierd },
-                                typescript = { prettierd },
-                                typescriptreact = { prettierd },
-                                yaml = { prettierd },
-                                json = { prettierd },
-                                jsonc = { prettierd },
-                                html = { prettierd },
-                                css = { prettierd },
-                                scss = { prettierd },
-                                xml = { prettierd },
-                                vue = { prettierd },
-                                markdown = { prettierd },
-                            }
-                        },
-                        filetypes = {
-                            'javascript',
-                            'typescript',
-                            'typescriptreact',
-                            'yaml',
-                            'json',
-                            'jsonc',
-                            'html',
-                            'css',
-                            'scss',
-                            'xml',
-                            'vue',
-                            'markdown'
-                        }
-                    })(server_name)
-                end
-
             })
         end
     }

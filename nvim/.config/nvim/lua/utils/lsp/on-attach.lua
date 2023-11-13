@@ -71,7 +71,7 @@ local function shared_on_attach(client, bufnr)
     )
 
 
-    enable_format_on_save(client, bufnr)
+    -- enable_format_on_save(client, bufnr)
 end
 
 return shared_on_attach
