@@ -4,6 +4,7 @@
     ./apps/git.nix
     ./apps/fzf.nix
     ./apps/neovim.nix
+    ./apps/tmux.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -74,12 +75,7 @@
     enable = true;
     settings = {
       default_shell = "fish";
-        };
-      };
-
-  programs.tmux = {
-    enable = true;
-    shell = "${pkgs.fish}/bin/fish";
+    };
   };
 
   # Let Home Manager install and manage itself.
