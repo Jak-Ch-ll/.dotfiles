@@ -20,6 +20,8 @@ return {
             json = prettier,
             jsonc = prettier,
             markdown = prettier,
+
+            nix = { 'alejandra' }
         },
         format_on_save = {
             lsp_fallback = true,

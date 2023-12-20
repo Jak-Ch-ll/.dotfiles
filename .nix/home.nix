@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./apps/git.nix
     ./apps/fzf.nix
@@ -39,6 +38,7 @@
 
     # Copilot needs nodejs to work, mind find a better solution at some point
     nodejs-slim_20
+    alejandra
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -70,7 +70,7 @@
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    };
+  };
   programs.zellij = {
     enable = true;
     settings = {
@@ -84,6 +84,6 @@
   # enable flakes
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = ["nix-command" "flakes"];
   };
 }
