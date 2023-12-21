@@ -17,14 +17,7 @@ vim.o.errorbells = false
 
 vim.o.signcolumn = "yes"
 
--- vim.o.lazyredraw = true
-
 vim.o.termguicolors = true
-
--- vim.o.spell = true
-
-vim.o.cmdheight = 0
--- vim.o.showmode = false
 
 -- split window
 vim.o.laststatus = 3
