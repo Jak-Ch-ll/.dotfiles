@@ -41,6 +41,8 @@
     alejandra
   ];
 
+  programs.ripgrep.enable = true;
+
   home.sessionPath = [
     "$HOME/.dotfiles/.bin"
   ];
