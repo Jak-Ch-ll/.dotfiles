@@ -83,6 +83,15 @@
     initExtra = ''
       bind '"\cs": tmux-session-switcher'
       bind '"\es": tmux-session-creator'
+
+      # start or attach to tmux
+      session_name="home"
+
+      if ! (tmux has-session -t "$session_name" 2> /dev/null); then
+      	tmux new-session -s "$session_name"
+      else
+      	tmux attach -t "$session_name"
+      fi
     '';
   };
   programs.zellij = {
