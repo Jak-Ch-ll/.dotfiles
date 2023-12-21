@@ -43,6 +43,8 @@
 
   programs.ripgrep.enable = true;
 
+  programs.gh.enable = true;
+
   home.sessionPath = [
     "$HOME/.dotfiles/.bin"
   ];
