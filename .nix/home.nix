@@ -70,10 +70,20 @@
   #  /etc/profiles/per-user/j/etc/profile.d/hm-session-vars.sh
   #
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellInit = ''
+      bind \cs tmux-session-switcher
+      bind \es tmux-session-creator
+    '';
+  };
   programs.bash = {
     enable = true;
     enableCompletion = true;
+    initExtra = ''
+      bind '"\cs": tmux-session-switcher'
+      bind '"\es": tmux-session-creator'
+    '';
   };
   programs.zellij = {
     enable = true;
