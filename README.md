@@ -2,28 +2,20 @@ This is my (currently experimental) user setup with Nix and Home Manager
 
 ## Prerequisites
 
-Install `git`, `curl` and `xz`
+Have `curl` installed and `systemd` enabled
 
 ### Debian + WSL
 
 #### 1. Install the necessary packages:
 
 ```sh
-sudo apt update
-sudo apt install git curl xz-utils
+sudo apt update && sudo apt install curl
 ```
 
 #### 2. Activate systemd support ([Docs](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/))
 
 ```sh
-sudo vi /etc/wsl.conf
-```
-
-Add the following:
-
-```
-[boot]
-systemd=true
+echo "[boot]\nsystemd=true" > sudo /etc/wsl.conf
 ```
 
 Restart WSL
@@ -34,43 +26,35 @@ wsl.exe --shutdown
 
 ## Setup
 
-1. [Install Nix](https://nixos.org/download#download-nix)
+1. Install Nix via the [Determinate Installer](https://github.com/DeterminateSystems/nix-installer) (Alternativly use the [offical installer](https://nixos.org/download#download-nix) but then you have to enable flakes and nix-commands afterwards)
 
-Note: We are currently installing v2.18.1 because of [#4692](https://github.com/nix-community/home-manager/issues/4692)
+Note: We currently don't want to go above v2.18.1 because of [#4692](https://github.com/nix-community/home-manager/issues/4692)
 
 ```sh
-sh <(curl -L https://releases.nixos.org/nix/nix-2.18.1/install) --daemon
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix/tag/v0.15.1 | sh -s -- install
 ```
 
 Restart shell
 
-2. Clone this repo
-
-```sh
-git clone https://github.com/Jak-Ch-ll/.dotfiles.git
-```
-
-3. Cd into the directory and switch to branch `nix`
-
-```sh
-cd .dotfiles
-git switch nix
-```
-
-4. Delete (and backup if needed) the following files
+2. Delete (and backup if needed) the following files
 
 ```sh
 rm ~/.profile ~/.bashrc
 ```
 
-5. Run Home Manager with Flakes ([See manual](https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes))
+3. Run Home Manager with Flakes ([See manual](https://nix-community.github.io/home-manager/index.xhtml#ch-nix-flakes))
 
 ```sh
-nix --extra-experimental-features "nix-command flakes" run home-manager/master -- init --switch
-nix --extra-experimental-features "nix-command flakes" run home-manager/master -- --extra-experimental-features "nix-command flakes" switch flake .nix/
+nix run home-manager/master -- switch --flake "github:Jak-Ch-ll/.dotfiles/nix?dir=.nix"
 ```
 
-Restart shell
+4. Clone this repo
+
+```sh
+git clone --branch nix https://github.com/Jak-Ch-ll/.dotfiles.git
+```
+
+5. Restart shell
 
 ## Postinstall
 
