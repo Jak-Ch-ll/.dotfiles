@@ -1,136 +1,136 @@
 return {
-    { import = 'plugins.lsp.languages' },
-    {
-        'neovim/nvim-lspconfig',
-        event = 'VeryLazy',
+	{ import = 'plugins.lsp.languages' },
+	{
+		'neovim/nvim-lspconfig',
+		event = 'VeryLazy',
 
-        dependencies = {
-            'williamboman/mason-lspconfig.nvim',
+		dependencies = {
+			'williamboman/mason-lspconfig.nvim',
 
-            'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-nvim-lsp',
-        },
+			'hrsh7th/nvim-cmp',
+			'hrsh7th/cmp-nvim-lsp',
+		},
 
-        config = function()
-            local mason = require('mason-lspconfig')
-            local lspconfig = require('lspconfig')
-            local utils = require('utils')
+		config = function()
+			local mason = require('mason-lspconfig')
+			local lspconfig = require('lspconfig')
+			local utils = require('utils')
 
-            local on_attach = require('utils/lsp/on-attach')
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            local shared_options = {
-                on_attach = on_attach,
-                capabilities = capabilities,
-            }
+			local on_attach = require('utils/lsp/on-attach')
+			local capabilities = require('cmp_nvim_lsp').default_capabilities()
+			local shared_options = {
+				on_attach = on_attach,
+				capabilities = capabilities,
+			}
 
-            local function setup_with_options(options)
-                return function(server_name)
-                    lspconfig[server_name].setup(
-                        utils.merge(
-                            shared_options,
-                            options
-                        )
-                    )
-                end
-            end
+			local function setup_with_options(options)
+				return function(server_name)
+					lspconfig[server_name].setup(
+						utils.merge(
+							shared_options,
+							options
+						)
+					)
+				end
+			end
 
-            vim.api.nvim_set_hl(0, 'LspInlayHint', { italic = true, fg = "#772277" })
-            vim.api.nvim_create_user_command('ToggleInlayHint', function()
-                vim.lsp.inlay_hint(0)
-            end, {})
+			vim.api.nvim_set_hl(0, 'LspInlayHint', { italic = true, fg = "#772277" })
+			vim.api.nvim_create_user_command('ToggleInlayHint', function()
+				vim.lsp.inlay_hint.enable()
+			end, {})
 
-            -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
-            mason.setup_handlers({
-                setup_with_options(),
+			-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
+			mason.setup_handlers({
+				setup_with_options(),
 
-                ["lua_ls"] = setup_with_options({
-                    settings = {
-                        Lua = {
-                            runtime = {
-                                version = 'LuaJIT',
-                            },
-                            diagnostics = {
-                                -- Get the language server to recognize the `vim` global
-                                globals = { 'vim' },
-                            },
-                            workspace = {
-                                -- Make the server aware of Neovim runtime files
-                                library = vim.api.nvim_get_runtime_file("", true),
-                            },
-                            -- Do not send telemetry data containing a randomized but unique identifier
-                            telemetry = {
-                                enable = false,
-                            },
-                            hint = {
-                                enable = true,
-                                arrayIndex = "Disable"
+				["lua_ls"] = setup_with_options({
+					settings = {
+						Lua = {
+							runtime = {
+								version = 'LuaJIT',
+							},
+							diagnostics = {
+								-- Get the language server to recognize the `vim` global
+								globals = { 'vim' },
+							},
+							workspace = {
+								-- Make the server aware of Neovim runtime files
+								library = vim.api.nvim_get_runtime_file("", true),
+							},
+							-- Do not send telemetry data containing a randomized but unique identifier
+							telemetry = {
+								enable = false,
+							},
+							hint = {
+								enable = true,
+								arrayIndex = "Disable"
 
-                            }
-                        }
-                    }
-                }),
+							}
+						}
+					}
+				}),
 
-                -- ['rust_analyzer'] = function()
-                --     require('rust-tools').setup({
-                --         server = utils.merge(
-                --             shared_options,
-                --             {
-                --                 settings = {
-                --                     ["rust-analyzer"] = {
-                --                         checkOnSave = {
-                --                             command = "clippy"
-                --                         }
-                --                     }
-                --                 }
-                --             }
-                --         )
-                --     })
-                -- end,
+				-- ['rust_analyzer'] = function()
+				--     require('rust-tools').setup({
+				--         server = utils.merge(
+				--             shared_options,
+				--             {
+				--                 settings = {
+				--                     ["rust-analyzer"] = {
+				--                         checkOnSave = {
+				--                             command = "clippy"
+				--                         }
+				--                     }
+				--                 }
+				--             }
+				--         )
+				--     })
+				-- end,
 
-                ['tsserver'] = function()
-                    require('typescript').setup({
-                        server = utils.merge(
-                            shared_options,
-                            {
-                                settings = {
-                                    typescript = {
-                                        inlayHints = {
-                                            includeInlayEnumMemberValueHints = true,
-                                            includeInlayFunctionLikeReturnTypeHints = true,
-                                            includeInlayFunctionParameterTypeHints = true,
-                                            includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-                                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                                            includeInlayPropertyDeclarationTypeHints = true,
-                                            includeInlayVariableTypeHints = true,
-                                        },
-                                    },
-                                }
-                            }
-                        )
-                    })
-                end,
+				['tsserver'] = function()
+					require('typescript').setup({
+						server = utils.merge(
+							shared_options,
+							{
+								settings = {
+									typescript = {
+										inlayHints = {
+											includeInlayEnumMemberValueHints = true,
+											includeInlayFunctionLikeReturnTypeHints = true,
+											includeInlayFunctionParameterTypeHints = true,
+											includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+											includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+											includeInlayPropertyDeclarationTypeHints = true,
+											includeInlayVariableTypeHints = true,
+										},
+									},
+								}
+							}
+						)
+					})
+				end,
 
-                -- ['volar'] = setup_with_options({
-                --     filetypes = { 'typescript', 'vue' }
-                -- }),
+				-- ['volar'] = setup_with_options({
+				--     filetypes = { 'typescript', 'vue' }
+				-- }),
 
-                ['jsonls'] = function(server_name)
-                    setup_with_options({
-                        settings = {
-                            json = {
-                                schemas = require('schemastore').json.schemas(),
-                                validate = { enable = true },
-                            }
-                        }
-                    })(server_name)
-                end,
+				['jsonls'] = function(server_name)
+					setup_with_options({
+						settings = {
+							json = {
+								schemas = require('schemastore').json.schemas(),
+								validate = { enable = true },
+							}
+						}
+					})(server_name)
+				end,
 
-                ['emmet_language_server'] = setup_with_options({
-                    filetypes = { 'html', 'css', 'scss', 'javascript', 'typescript', 'vue' }
-                }),
-            })
-        end
-    }
+				['emmet_language_server'] = setup_with_options({
+					filetypes = { 'html', 'css', 'scss', 'javascript', 'typescript', 'vue' }
+				}),
+			})
+		end
+	}
 }
 
 -- other language plugins
