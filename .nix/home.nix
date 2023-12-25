@@ -31,6 +31,9 @@
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
+
+      # WSL
+      wslu
     ];
 
   programs.ripgrep.enable = true;

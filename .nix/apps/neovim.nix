@@ -8,9 +8,6 @@
       # Copilot
       nodejs-slim_20
 
-      # WSL
-      wslu
-
       # telescope-fzf
       gnumake
       clang_multi
