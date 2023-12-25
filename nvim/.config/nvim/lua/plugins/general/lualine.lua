@@ -2,11 +2,14 @@ return {
 	'nvim-lualine/lualine.nvim',
 	lazy = false,
 	dependencies = {
-		'kyazdani42/nvim-web-devicons',
-		opts = {
-			default = true,
-			icons_enabled = true
-		}
+		{
+			'kyazdani42/nvim-web-devicons',
+			opts = {
+				default = true,
+				icons_enabled = true
+			}
+		},
+		{ 'AndreM222/copilot-lualine' }
 	},
 	config = function()
 		local custom_filename = require('lualine.components.filename'):extend()
@@ -86,8 +89,11 @@ return {
 					filename(), status()
 				},
 				lualine_x = {
-					'filetype', 'progress', 'location' },
-				lualine_y = {},
+					'filetype', 'progress', 'location'
+				},
+				lualine_y = {
+					{ 'copilot', show_colors = true }
+				},
 				lualine_z = {},
 			}
 		})
