@@ -1,12 +1,33 @@
-{ config, ... }:
-{
+{ config, pkgs, ... }: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     vimAlias = true;
+
+    extraPackages = with pkgs; [
+      # Copilot
+      nodejs-slim_20
+
+      # WSL
+      wslu
+
+      # telescope-fzf
+      gnumake
+      clang_multi
+
+      # Language Stuff
+      ## Nix
+      nixfmt
+      ## JS/TS
+      prettierd
+
+      # Misc
+      tree-sitter
+    ];
   };
 
   home.file = {
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
   };
 }

@@ -1,10 +1,5 @@
-{pkgs, ...}: {
-  imports = [
-    ./apps/git.nix
-    ./apps/fzf.nix
-    ./apps/neovim.nix
-    ./apps/tmux.nix
-  ];
+{ pkgs, ... }: {
+  imports = [ ./apps/git.nix ./apps/fzf.nix ./apps/neovim.nix ./apps/tmux.nix ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -22,24 +17,21 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs; [
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+  home.packages = with pkgs;
+    [
+      # # It is sometimes useful to fine-tune packages, for example, by applying
+      # # overrides. You can do that directly here, just don't forget the
+      # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+      # # fonts?
+      # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-
-    # Copilot needs nodejs to work, mind find a better solution at some point
-    nodejs-slim_20
-    alejandra
-  ];
+      # # You can also create simple shell scripts directly inside your
+      # # configuration. For example, this adds a command 'my-hello' to your
+      # # environment:
+      # (pkgs.writeShellScriptBin "my-hello" ''
+      #   echo "Hello, ${config.home.username}!"
+      # '')
+    ];
 
   programs.ripgrep.enable = true;
 
@@ -52,9 +44,7 @@
     };
   };
 
-  home.sessionPath = [
-    "$HOME/.dotfiles/.bin"
-  ];
+  home.sessionPath = [ "$HOME/.dotfiles/.bin" ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -107,9 +97,7 @@
   };
   programs.zellij = {
     enable = true;
-    settings = {
-      default_shell = "fish";
-    };
+    settings = { default_shell = "fish"; };
   };
 
   # Let Home Manager install and manage itself.
@@ -118,6 +106,6 @@
   # enable flakes
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = ["nix-command" "flakes"];
+    settings.experimental-features = [ "nix-command" "flakes" ];
   };
 }
