@@ -62,9 +62,4 @@ git clone --branch nix https://github.com/Jak-Ch-ll/.dotfiles.git
 
 ## Apply changes
 
-Run the following in the `.dotfiles/` directory
-
-```sh
-home-manager switch --flake .nix/
-```
-
+To apply configuration changes just run `hms` from anywhere

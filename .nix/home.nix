@@ -36,6 +36,10 @@
       wslu
     ];
 
+  home.shellAliases = {
+    hms = "home-manager switch --flake ~/.dotfiles/.nix/";
+  };
+
   programs.ripgrep.enable = true;
 
   programs.gh = {
