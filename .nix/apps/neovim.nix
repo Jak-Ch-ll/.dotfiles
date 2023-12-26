@@ -5,8 +5,8 @@
     vimAlias = true;
 
     extraPackages = with pkgs; [
-      # Copilot
-      nodejs-slim_20
+      # Copilot & Mason
+      nodejs_20
 
       # telescope-fzf
       gnumake
