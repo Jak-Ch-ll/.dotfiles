@@ -93,16 +93,12 @@
     enable = true;
     enableCompletion = true;
     initExtra = ''
-      bind '"\cs": tmux-session-switcher'
-      bind '"\es": tmux-session-creator'
-
       # start or attach to tmux
       session_name="home"
 
-      if ! (tmux has-session -t "$session_name" 2> /dev/null); then
-      	tmux new-session -s "$session_name"
-      else
-      	tmux attach -t "$session_name"
+      # https://wiki.archlinux.org/title/Tmux#Start_tmux_on_every_shell_login
+      if [ -x "$(command -v tmux)" ] && [ -n "$DISPLAY" ] && [ -z "$TMUX" ]; then
+        exec tmux new-session -A -s $USER >/dev/null 2>&1
       fi
     '';
   };
