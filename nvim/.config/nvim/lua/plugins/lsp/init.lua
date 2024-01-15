@@ -110,9 +110,68 @@ return {
 					})
 				end,
 
-				-- ['volar'] = setup_with_options({
-				--     filetypes = { 'typescript', 'vue' }
-				-- }),
+				['svelte'] = setup_with_options({
+					settings = {
+						typescript = {
+							inlayHints = {
+								parameterNames = {
+									enabled = true
+								},
+								parameterTypes = {
+									enabled = true
+								},
+								variableTypes = {
+									enabled = true,
+								},
+								propertyDeclarationTypes = {
+									enabled = true,
+								},
+								functionLikeReturnTypes = {
+									-- for some reason inlay hints break for
+									-- svelte lsp when this is enabled
+									-- @todo need to investigate further
+									enabled = false,
+								},
+								enumMemberValues = {
+									enabled = true,
+								},
+							}
+						}
+					}
+				}),
+
+				['volar'] = setup_with_options({
+					settings = {
+						vue = {
+							inlayHints = {
+								missingProps = true,
+								includeInlayVariableTypeHints = true,
+							}
+						},
+						typescript = {
+							inlayHints = {
+								parameterNames = {
+									enabled = true
+								},
+								parameterTypes = {
+									enabled = true
+								},
+								variableTypes = {
+									enabled = true,
+								},
+								propertyDeclarationTypes = {
+									enabled = true,
+								},
+								functionLikeReturnTypes = {
+									enabled = true,
+								},
+								enumMemberValues = {
+									enabled = true,
+								},
+							}
+						}
+					}
+				}),
 
 				['jsonls'] = function(server_name)
 					setup_with_options({
