@@ -33,6 +33,7 @@
 
     # WSL
     wslu
+    wget
 
     openssh
   ];
