@@ -36,7 +36,7 @@ return {
 
 			vim.api.nvim_set_hl(0, 'LspInlayHint', { italic = true, fg = "#772277" })
 			vim.api.nvim_create_user_command('ToggleInlayHint', function()
-				vim.lsp.inlay_hint.enable()
+				vim.lsp.inlay_hint.enable(nil, not vim.lsp.inlay_hint.is_enabled())
 			end, {})
 
 			-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
