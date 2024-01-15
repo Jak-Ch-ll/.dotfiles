@@ -27,16 +27,20 @@ end
 local function shared_on_attach(client, bufnr)
 	vim.lsp.inlay_hint.enable(bufnr, true)
 
-	local function nmap(keys, fn, desc)
+	local function keymap(mode, keys, fn, desc)
 		if desc then
 			desc = 'LSP: ' .. desc
 		end
 
-		vim.keymap.set('n', keys, fn, { buffer = bufnr, desc = desc })
+		vim.keymap.set(mode, keys, fn, { buffer = bufnr, desc = desc })
+	end
+
+	local function nmap(keys, fn, desc)
+		keymap('n', keys, fn, desc)
 	end
 
 	-- nmap('<leader>r', vim.lsp.buf.rename, '[R]ename') // moved to inc-rename
-	nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+	keymap({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
 	nmap('gh', vim.lsp.buf.hover, '[G]oto [H]over documentation')
 	nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
