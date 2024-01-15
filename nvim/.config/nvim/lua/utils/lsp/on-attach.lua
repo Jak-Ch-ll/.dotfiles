@@ -74,6 +74,10 @@ local function shared_on_attach(client, bufnr)
 		'[S]earch [W]orkspace [S]ymbols'
 	)
 
+	nmap('<leader>dit',
+		function() vim.lsp.inlay_hint.enable(nil, not vim.lsp.inlay_hint.is_enabled()) end,
+		'Toggle [I]nlay [H]int'
+	)
 
 	-- enable_format_on_save(client, bufnr)
 end
