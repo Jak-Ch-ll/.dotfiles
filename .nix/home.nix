@@ -53,7 +53,17 @@
     };
   };
 
-  home.sessionPath = [ "$HOME/.dotfiles/.bin" ];
+  home.sessionPath = [
+    "$HOME/.dotfiles/.bin"
+
+    # WSL
+    # In /etc/wsl.conf we are setting `appendWindowsPath` to false to avoid getting
+    # unnecessary binaries added to PATH. We re-add paths as needed here
+    "/mnt/c/Windows/"
+    "/mnt/c/Windows/system32/"
+    "/mnt/d/Programs/Microsoft VS Code/bin/"
+    "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/"
+  ];
 
   programs.direnv = {
     enable = true;

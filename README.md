@@ -18,7 +18,16 @@ sudo apt update && sudo apt install curl
 echo "[boot]\nsystemd=true" > sudo /etc/wsl.conf
 ```
 
-Restart WSL
+#### 3. (Optional) Deactivate Windows PATH
+
+```sh
+echo "\n[interop]\nappendWindowsPath=False" >> sudo /etc/wsl.conf
+```
+
+This avoids a path polleted with binaries installed on Windows. Any needed bin
+dir is added back in `home.nix`
+
+#### 4. Restart WSL
 
 ```sh
 wsl.exe --shutdown
