@@ -37,6 +37,7 @@
 
     openssh
     jq
+    tree
   ];
 
   home.shellAliases = {
