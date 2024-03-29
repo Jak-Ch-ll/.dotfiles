@@ -8,6 +8,12 @@
     gs = "git status";
     gu = "git push";
     lg = "lazygit";
+
+    js = "jj st";
+    jl = "jj log -l 10";
+    jb = "jj branch list";
+    je = "jj edit";
+    jd = "jj diff";
   };
 
   programs.git = {
