@@ -16,6 +16,7 @@
       ## Nix
       nixfmt
       ## JS/TS
+      typescript
       prettierd
       ## Lua
       stylua

@@ -26,24 +26,29 @@ return {
 			local function setup_with_options(options)
 				return function(server_name)
 					lspconfig[server_name].setup(
-						utils.merge(
-							shared_options,
-							options
-						)
+						utils.merge(shared_options, options)
 					)
 				end
 			end
 
-			vim.api.nvim_set_hl(0, 'LspInlayHint', { italic = true, fg = "#772277" })
+			-- Inlay Hint Stuff
+			vim.api.nvim_set_hl(
+				0,
+				'LspInlayHint',
+				{ italic = true, fg = '#772277' }
+			)
 			vim.api.nvim_create_user_command('ToggleInlayHint', function()
-				vim.lsp.inlay_hint.enable(nil, not vim.lsp.inlay_hint.is_enabled())
+				vim.lsp.inlay_hint.enable(
+					nil,
+					not vim.lsp.inlay_hint.is_enabled()
+				)
 			end, {})
 
 			-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
 			mason.setup_handlers({
 				setup_with_options(),
 
-				["lua_ls"] = setup_with_options({
+				['lua_ls'] = setup_with_options({
 					settings = {
 						Lua = {
 							runtime = {
@@ -55,7 +60,10 @@ return {
 							},
 							workspace = {
 								-- Make the server aware of Neovim runtime files
-								library = vim.api.nvim_get_runtime_file("", true),
+								library = vim.api.nvim_get_runtime_file(
+									'',
+									true
+								),
 							},
 							-- Do not send telemetry data containing a randomized but unique identifier
 							telemetry = {
@@ -63,11 +71,10 @@ return {
 							},
 							hint = {
 								enable = true,
-								arrayIndex = "Disable"
-
-							}
-						}
-					}
+								arrayIndex = 'Disable',
+							},
+						},
+					},
 				}),
 
 				-- ['rust_analyzer'] = function()
@@ -87,38 +94,38 @@ return {
 				--     })
 				-- end,
 
-				['tsserver'] = function()
-					require('typescript').setup({
-						server = utils.merge(
-							shared_options,
-							{
-								settings = {
-									typescript = {
-										inlayHints = {
-											includeInlayEnumMemberValueHints = true,
-											includeInlayFunctionLikeReturnTypeHints = true,
-											includeInlayFunctionParameterTypeHints = true,
-											includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-											includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-											includeInlayPropertyDeclarationTypeHints = true,
-											includeInlayVariableTypeHints = true,
-										},
-									},
-								}
-							}
-						)
-					})
-				end,
+				-- ['tsserver'] = function()
+				-- 	require('typescript').setup({
+				-- 		server = utils.merge(
+				-- 			shared_options,
+				-- 			{
+				-- 				settings = {
+				-- 					typescript = {
+				-- 						inlayHints = {
+				-- 							includeInlayEnumMemberValueHints = true,
+				-- 							includeInlayFunctionLikeReturnTypeHints = true,
+				-- 							includeInlayFunctionParameterTypeHints = true,
+				-- 							includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+				-- 							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				-- 							includeInlayPropertyDeclarationTypeHints = true,
+				-- 							includeInlayVariableTypeHints = true,
+				-- 						},
+				-- 					},
+				-- 				}
+				-- 			}
+				-- 		)
+				-- 	})
+				-- end,
 
 				['svelte'] = setup_with_options({
 					settings = {
 						typescript = {
 							inlayHints = {
 								parameterNames = {
-									enabled = true
+									enabled = true,
 								},
 								parameterTypes = {
-									enabled = true
+									enabled = true,
 								},
 								variableTypes = {
 									enabled = true,
@@ -135,26 +142,35 @@ return {
 								enumMemberValues = {
 									enabled = true,
 								},
-							}
-						}
-					}
+							},
+						},
+					},
 				}),
 
 				['volar'] = setup_with_options({
+					filetypes = { 'vue', 'typescript', 'javascript' },
+					init_options = {
+						vue = {
+							hybridMode = false,
+						},
+					},
 					settings = {
 						vue = {
 							inlayHints = {
 								missingProps = true,
+								inlineHandlerLeading = true,
+								optionsWrapper = true,
+								vBindShorthand = false,
 								includeInlayVariableTypeHints = true,
-							}
+							},
 						},
 						typescript = {
 							inlayHints = {
 								parameterNames = {
-									enabled = true
+									enabled = true,
 								},
 								parameterTypes = {
-									enabled = true
+									enabled = true,
 								},
 								variableTypes = {
 									enabled = true,
@@ -168,9 +184,9 @@ return {
 								enumMemberValues = {
 									enabled = true,
 								},
-							}
-						}
-					}
+							},
+						},
+					},
 				}),
 
 				['jsonls'] = function(server_name)
@@ -179,23 +195,28 @@ return {
 							json = {
 								schemas = require('schemastore').json.schemas(),
 								validate = { enable = true },
-							}
-						}
+							},
+						},
 					})(server_name)
 				end,
 
 				['emmet_language_server'] = setup_with_options({
-					filetypes = { 'html', 'css', 'scss', 'javascript', 'typescript', 'vue' }
+					filetypes = {
+						'html',
+						'css',
+						'scss',
+						'javascript',
+						'typescript',
+						'vue',
+					},
 				}),
 			})
-		end
-	}
+		end,
+	},
 }
 
 -- other language plugins
 -- sigmaSd/deno-nvim
-
-
 
 -- svelte = {
 --     config = {
