@@ -2,6 +2,7 @@
   home.shellAliases = {
     gb =
       "git branch --format='%(HEAD) %(refname:short) %(color:green)(%(committerdate:relative)) %(color:blue)[%(authorname)]' --sort=-committerdate";
+    gbs = "git branch | fzf | xargs git switch";
     gg = "git log --graph --simplify-by-decoration --pretty=format:'%d' --all";
     gl =
       "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit";
