@@ -48,6 +48,25 @@
 
   programs.ripgrep.enable = true;
 
+  programs.starship = {
+    enable = true;
+    settings = {
+      format = ''
+        $shell$directory$status
+        $character
+      '';
+      shell = {
+        disabled = false;
+        fish_indicator = "🐟";
+      };
+      status = { disabled = false; };
+
+      right_format = "$memory_usage$nix_shell";
+      memory_usage = { disabled = false; };
+      nix_shell = { format = "[$symbol$name]($style)"; };
+    };
+  };
+
   programs.gh = {
     enable = true;
 
