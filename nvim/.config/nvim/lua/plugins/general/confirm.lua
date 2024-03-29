@@ -1,9 +1,9 @@
-local prettier = { { "prettierd", "prettier" } }
+local prettier = { { 'prettierd', 'prettier' } }
 
 return {
-	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
-	cmd = { "ConformInfo" },
+	'stevearc/conform.nvim',
+	event = { 'BufWritePre' },
+	cmd = { 'ConformInfo' },
 	opts = {
 		formatters_by_ft = {
 			javascript = prettier,
@@ -21,11 +21,13 @@ return {
 			jsonc = prettier,
 			markdown = prettier,
 
-			nix = { 'nixfmt' }
+			nix = { 'nixfmt' },
+
+			lua = { 'stylua' },
 		},
 		format_on_save = {
 			lsp_fallback = true,
 			timeout_ms = 1000,
 		},
-	}
+	},
 }

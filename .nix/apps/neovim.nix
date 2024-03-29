@@ -17,6 +17,8 @@
       nixfmt
       ## JS/TS
       prettierd
+      ## Lua
+      stylua
 
       # Misc
       tree-sitter
