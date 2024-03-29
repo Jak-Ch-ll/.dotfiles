@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+path=${1:-$PWD}
+
+# Get the current Jujutsu revision
+rev=$(cd $path; jj show -T description 2> /dev/null | head -n 1)
+
+
+# if rev is empty, use git branch
+if [ -z "$rev" ]; then
+	rev=$(git -C $path rev-parse --abbrev-ref HEAD 2> /dev/null)
+fi
+
+echo $rev
+
