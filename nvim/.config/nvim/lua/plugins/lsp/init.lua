@@ -76,22 +76,37 @@ return {
 				setup_with_options(),
 
 				['lua_ls'] = setup_with_options({
+					on_init = function(client)
+						local path = client.workspace_folders[1].name
+						if
+							vim.loop.fs_stat(path .. '/.luarc.json')
+							or vim.loop.fs_stat(path .. '/.luarc.jsonc')
+						then
+							return
+						end
+
+						client.config.settings.Lua = vim.tbl_deep_extend(
+							'force',
+							client.config.settings.Lua,
+							{
+								runtime = {
+									version = 'LuaJIT',
+								},
+								-- Make the server aware of Neovim runtime files
+								workspace = {
+									checkThirdParty = false,
+									library = {
+										vim.env.VIMRUNTIME,
+									},
+								},
+								diagnostics = {
+									disable = { 'undefined-field' },
+								},
+							}
+						)
+					end,
 					settings = {
 						Lua = {
-							runtime = {
-								version = 'LuaJIT',
-							},
-							diagnostics = {
-								-- Get the language server to recognize the `vim` global
-								globals = { 'vim' },
-							},
-							workspace = {
-								-- Make the server aware of Neovim runtime files
-								library = vim.api.nvim_get_runtime_file(
-									'',
-									true
-								),
-							},
 							-- Do not send telemetry data containing a randomized but unique identifier
 							telemetry = {
 								enable = false,
