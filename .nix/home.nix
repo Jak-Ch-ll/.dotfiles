@@ -40,6 +40,11 @@
     tree
     unzip
     jujutsu
+
+    # docker
+    docker
+    containerd
+    runc
   ];
 
   home.shellAliases = {
