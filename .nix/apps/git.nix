@@ -1,8 +1,8 @@
-{
-  home.shellAliases = {
+{ lib, ... }:
+let
+  aliases = {
     gb =
       "git branch --format='%(HEAD) %(refname:short) %(color:green)(%(committerdate:relative)) %(color:blue)[%(authorname)]' --sort=-committerdate";
-    gbs = "git branch | fzf | xargs git switch";
     gg = "git log --graph --simplify-by-decoration --pretty=format:'%d' --all";
     gl =
       "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit";
@@ -15,6 +15,14 @@
     jb = "jj branch list";
     je = "jj edit";
     jd = "jj diff";
+
+  };
+in {
+  home.shellAliases =
+    lib.mkMerge [ aliases { gbs = "git branch | fzf | xargs git switch"; } ];
+  programs.nushell = {
+    shellAliases = aliases;
+    extraConfig = "def gbs [] { git branch | fzf | xargs git switch }";
   };
 
   programs.git = {

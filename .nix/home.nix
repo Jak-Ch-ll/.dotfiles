@@ -143,6 +143,9 @@
     enable = true;
     settings = { default_shell = "fish"; };
   };
+  programs.nushell = {
+    enable = true;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
