@@ -248,9 +248,6 @@ return {
 						'html',
 						'css',
 						'scss',
-						'javascript',
-						'typescript',
-						'vue',
 					},
 				}),
 			})
