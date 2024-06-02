@@ -14,7 +14,7 @@
 
       # Language Stuff
       ## Nix
-      nixfmt
+      nixfmt-rfc-style
       ## JS/TS
       typescript
       prettierd
