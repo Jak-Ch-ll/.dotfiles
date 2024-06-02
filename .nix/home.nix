@@ -57,18 +57,15 @@
     enable = true;
     settings = {
       format = ''
-        $shell$directory$status
+        $shell$directory$nix_shell$status
         $character
       '';
       shell = {
         disabled = false;
         fish_indicator = "🐟";
       };
+      nix_shell = { format = "$symbol"; };
       status = { disabled = false; };
-
-      right_format = "$memory_usage$nix_shell";
-      memory_usage = { disabled = false; };
-      nix_shell = { format = "[$symbol$name]($style)"; };
     };
   };
 
