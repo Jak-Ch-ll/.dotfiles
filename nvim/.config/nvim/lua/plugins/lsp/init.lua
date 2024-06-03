@@ -184,43 +184,105 @@ return {
 					},
 				}),
 
-				['volar'] = setup_with_options({
+				['vtsls'] = setup_with_options({
 					filetypes = { 'vue', 'typescript', 'javascript' },
+					settings = {
+						vtsls = {
+							tsserver = {
+								globalPlugins = {
+									{
+										name = '@vue/typescript-plugin',
+										location = require('mason-registry')
+											.get_package('vue-language-server')
+											:get_install_path()
+											.. '/node_modules/@vue/language-server',
+										languages = { 'vue' },
+										configNamespace = 'typescript',
+										enableForWorkspaceTypeScriptVersions = true,
+									},
+								},
+							},
+							enableMoveToFileCodeAction = true,
+							experimental = {
+
+								maxInlayHintLength = 30,
+								completion = {
+									enableServerSideFuzzyMatch = true,
+								},
+							},
+						},
+						typescript = {
+							updateImportsOnFileMove = {
+								enabled = 'always',
+							},
+							inlayHints = {
+								parameterNames = { enabled = 'literals' },
+								parameterTypes = { enabled = true },
+								variableTypes = { enabled = true },
+								propertyDeclarationTypes = { enabled = true },
+								functionLikeReturnTypes = { enabled = true },
+								enumMemberValues = { enabled = true },
+							},
+							preferences = {
+								preferTypeOnlyAutoImports = true,
+								useAliasesForRenames = false,
+							},
+							tsserver = {
+								experimental = {
+									-- enableProjectDiagnostics = true,
+								},
+							},
+						},
+						javascript = {
+							inlayHints = {
+								parameterNames = { enabled = 'literals' },
+								parameterTypes = { enabled = true },
+								variableTypes = { enabled = true },
+								propertyDeclarationTypes = { enabled = true },
+								functionLikeReturnTypes = { enabled = true },
+								enumMemberValues = { enabled = true },
+							},
+						},
+						-- vue = {
+						-- 	inlayHints = {
+						-- 		parameterNames = { enabled = 'literals' },
+						-- 		parameterTypes = { enabled = true },
+						-- 		variableTypes = { enabled = true },
+						-- 		propertyDeclarationTypes = { enabled = true },
+						-- 		functionLikeReturnTypes = { enabled = true },
+						-- 		enumMemberValues = { enabled = true },
+						-- 	},
+						-- },
+					},
+				}),
+
+				['volar'] = setup_with_options({
+					-- filetypes = { 'vue', 'typescript', 'javascript' },
 					init_options = {
 						vue = {
-							hybridMode = false,
+							hybridMode = true,
 						},
 					},
 					settings = {
 						vue = {
+							-- server = {
+							-- 	hybridMode = true,
+							-- },
+							complete = {
+								casing = {
+									props = 'autoCamel',
+								},
+								autoInsert = {
+									dotValue = true,
+								},
+							},
 							inlayHints = {
+								destructuredProps = true,
 								missingProps = true,
 								inlineHandlerLeading = true,
 								optionsWrapper = true,
 								vBindShorthand = false,
 								includeInlayVariableTypeHints = true,
-							},
-						},
-						typescript = {
-							inlayHints = {
-								parameterNames = {
-									enabled = true,
-								},
-								parameterTypes = {
-									enabled = true,
-								},
-								variableTypes = {
-									enabled = true,
-								},
-								propertyDeclarationTypes = {
-									enabled = true,
-								},
-								functionLikeReturnTypes = {
-									enabled = true,
-								},
-								enumMemberValues = {
-									enabled = true,
-								},
 							},
 						},
 					},
