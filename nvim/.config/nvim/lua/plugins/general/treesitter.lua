@@ -22,13 +22,20 @@ return {
 			'query',
 			'vimdoc',
 
-			'go',
 			'rust',
+			'go',
 
 			'javascript',
 			'typescript',
+			'html',
 			'css',
+			'jsdoc',
 			'vue',
+			'svelte',
+
+			'json',
+			'yaml',
+			'markdown',
 		},
 
 		auto_install = true,
