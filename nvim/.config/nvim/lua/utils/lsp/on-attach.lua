@@ -31,6 +31,12 @@ local function enable_inlay_hints(client, bufnr)
 		return
 	end
 
+	local already_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+
+	if already_enabled then
+		return
+	end
+
 	-- initially enabled
 	local mode = vim.api.nvim_get_mode().mode
 	vim.lsp.inlay_hint.enable(mode ~= 'i', { bufnr = bufnr })
@@ -38,12 +44,14 @@ local function enable_inlay_hints(client, bufnr)
 	-- style
 	vim.api.nvim_set_hl(0, 'LspInlayHint', { italic = true, fg = '#772277' })
 
+	local auto_toggle_enabled = true
+
 	-- toggle command
 	vim.api.nvim_create_user_command('ToggleInlayHint', function()
-		vim.lsp.inlay_hint.enable(
-			not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }),
-			{ bufnr = bufnr }
-		)
+		local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+
+		vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+		auto_toggle_enabled = not enabled
 	end, {})
 
 	-- auto enable/disable
@@ -53,14 +61,18 @@ local function enable_inlay_hints(client, bufnr)
 		group = inlay_hints_group,
 		buffer = bufnr,
 		callback = function()
-			vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+			if auto_toggle_enabled then
+				vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+			end
 		end,
 	})
 	vim.api.nvim_create_autocmd('InsertLeave', {
 		group = inlay_hints_group,
 		buffer = bufnr,
 		callback = function()
-			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			if auto_toggle_enabled then
+				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			end
 		end,
 	})
 end
@@ -87,6 +99,7 @@ local function shared_on_attach(client, bufnr)
 		vim.lsp.buf.code_action,
 		'[C]ode [A]ction'
 	)
+	nmap('<leader>r', vim.lsp.buf.rename, 'Rename')
 
 	nmap('gh', vim.lsp.buf.hover, '[G]oto [H]over documentation')
 	nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
