@@ -31,18 +31,6 @@ return {
 				end
 			end
 
-			-- Inlay Hint Stuff
-			vim.api.nvim_set_hl(
-				0,
-				'LspInlayHint',
-				{ italic = true, fg = '#772277' }
-			)
-			vim.api.nvim_create_user_command('ToggleInlayHint', function()
-				vim.lsp.inlay_hint.enable(
-					not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
-				)
-			end, {})
-
 			-- Workaround for truncating long TypeScript inlay hints.
 			-- Blatenly stolen from https://github.com/MariaSolOs/dotfiles/blob/02af18f67d60977023c35b8302c0cfd1abbe0f96/.config/nvim/lua/lsp.lua#L266m
 			-- TODO: Remove this once there is a native solution (https://github.com/neovim/neovim/issues/27240)

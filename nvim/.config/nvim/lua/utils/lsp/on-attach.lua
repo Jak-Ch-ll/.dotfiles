@@ -25,8 +25,29 @@ local function enable_format_on_save(client, buffer)
 	end
 end
 
+local function enable_inlay_hints(client, bufnr)
+	if not client.server_capabilities.inlayHintProvider then
+		return
+	end
+
+	-- initially enabled
+	local mode = vim.api.nvim_get_mode().mode
+	vim.lsp.inlay_hint.enable(mode ~= 'i', { bufnr = bufnr })
+
+	-- style
+	vim.api.nvim_set_hl(0, 'LspInlayHint', { italic = true, fg = '#772277' })
+
+	-- toggle command
+	vim.api.nvim_create_user_command('ToggleInlayHint', function()
+		vim.lsp.inlay_hint.enable(
+			not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }),
+			{ bufnr = bufnr }
+		)
+	end, {})
+end
+
 local function shared_on_attach(client, bufnr)
-	vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	enable_inlay_hints(client, bufnr)
 
 	local function keymap(mode, keys, fn, desc)
 		if desc then
