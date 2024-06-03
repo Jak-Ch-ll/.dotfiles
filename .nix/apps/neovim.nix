@@ -1,8 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    vimAlias = true;
 
     extraPackages = with pkgs; [
       # Copilot & Mason
@@ -27,7 +27,16 @@
   };
 
   home.file = {
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
+  };
+
+  # https://github.com/yyx990803/launch-editor?tab=readme-ov-file#custom-editor-support
+  home = {
+    shellAliases = {
+      vim = "nvim --listen ./nvim.pipe";
+    };
+    sessionVariables = {
+      LAUNCH_EDITOR = "open-in-neovim.sh";
+    };
   };
 }
