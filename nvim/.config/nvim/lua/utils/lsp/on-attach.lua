@@ -25,6 +25,7 @@ local function enable_format_on_save(client, buffer)
 	end
 end
 
+-- based on: https://github.com/neovim/neovim/issues/24305
 local function enable_inlay_hints(client, bufnr)
 	if not client.server_capabilities.inlayHintProvider then
 		return
@@ -44,6 +45,24 @@ local function enable_inlay_hints(client, bufnr)
 			{ bufnr = bufnr }
 		)
 	end, {})
+
+	-- auto enable/disable
+	local inlay_hints_group =
+		vim.api.nvim_create_augroup('InlayHints', { clear = false })
+	vim.api.nvim_create_autocmd('InsertEnter', {
+		group = inlay_hints_group,
+		buffer = bufnr,
+		callback = function()
+			vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+		end,
+	})
+	vim.api.nvim_create_autocmd('InsertLeave', {
+		group = inlay_hints_group,
+		buffer = bufnr,
+		callback = function()
+			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+		end,
+	})
 end
 
 local function shared_on_attach(client, bufnr)
