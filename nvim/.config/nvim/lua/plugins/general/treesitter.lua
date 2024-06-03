@@ -10,7 +10,7 @@ return {
 		--     cmd = { 'TSPlaygroundToggle', 'TSNodeUnderCursor', 'TSHighlightCapturesUnderCursor' },
 		-- },
 		'nvim-treesitter/nvim-treesitter-context',
-		'windwp/nvim-ts-autotag',
+		{ 'windwp/nvim-ts-autotag', config = true },
 	},
 	init = function()
 		---@diagnostic disable-next-line: missing-fields
@@ -43,10 +43,6 @@ return {
 			},
 
 			indent = {
-				enable = true,
-			},
-
-			autotag = {
 				enable = true,
 			},
 		})
