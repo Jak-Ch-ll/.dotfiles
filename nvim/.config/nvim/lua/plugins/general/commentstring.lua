@@ -9,7 +9,7 @@
 --    https://github.com/neovim/neovim/pull/28176#issuecomment-2051944146
 return {
 	'JoosepAlviste/nvim-ts-context-commentstring',
-	config = {
+	opts = {
 		enable_autocmd = false,
 	},
 	init = function()

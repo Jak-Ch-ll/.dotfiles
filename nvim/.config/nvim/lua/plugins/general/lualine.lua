@@ -3,13 +3,13 @@ return {
 	lazy = false,
 	dependencies = {
 		{
-			'kyazdani42/nvim-web-devicons',
+			'nvim-tree/nvim-web-devicons',
 			opts = {
 				default = true,
-				icons_enabled = true
-			}
+				icons_enabled = true,
+			},
 		},
-		{ 'AndreM222/copilot-lualine' }
+		{ 'AndreM222/copilot-lualine' },
 	},
 	config = function()
 		local custom_filename = require('lualine.components.filename'):extend()
@@ -20,7 +20,9 @@ return {
 		end
 
 		local function is_empty(str)
-			if (str == nil or str == '') then return true end
+			if str == nil or str == '' then
+				return true
+			end
 
 			return false
 		end
@@ -32,11 +34,15 @@ return {
 
 			path = path:gsub(filename_matcher, '')
 
-			if (is_empty(path)) then return '' end
+			if is_empty(path) then
+				return ''
+			end
 
 			local foldername = string.match(path, '[^/]+$')
 
-			if (is_empty(foldername)) then return '' end
+			if is_empty(foldername) then
+				return ''
+			end
 
 			return '(' .. foldername .. ') '
 		end
@@ -55,7 +61,7 @@ return {
 				newfile_statue = true,
 				symbols = {
 					modified = '•',
-				}
+				},
 			}
 		end
 
@@ -63,8 +69,8 @@ return {
 		-- https://github.com/folke/noice.nvim/wiki/A-Guide-to-Messages#showmode
 		local function status()
 			return {
-				require("noice").api.statusline.mode.get,
-				cond = require("noice").api.statusline.mode.has,
+				require('noice').api.statusline.mode.get,
+				cond = require('noice').api.statusline.mode.has,
 			}
 		end
 		-- we don't want to see the mode
@@ -76,7 +82,7 @@ return {
 				ignore_focus = {
 					'TelescopePrompt',
 					'NvimTree',
-					'help'
+					'help',
 				},
 			},
 			sections = {
@@ -86,16 +92,19 @@ return {
 					'diagnostics',
 				},
 				lualine_c = {
-					filename(), status()
+					filename(),
+					status(),
 				},
 				lualine_x = {
-					'filetype', 'progress', 'location'
+					'filetype',
+					'progress',
+					'location',
 				},
 				lualine_y = {
-					{ 'copilot', show_colors = true }
+					{ 'copilot', show_colors = true },
 				},
 				lualine_z = {},
-			}
+			},
 		})
-	end
+	end,
 }

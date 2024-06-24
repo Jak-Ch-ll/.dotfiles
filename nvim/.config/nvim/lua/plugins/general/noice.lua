@@ -4,9 +4,6 @@ return {
 	enabled = true,
 	event = 'VeryLazy',
 
-	opts = {
-		-- add any options here
-	},
 	dependencies = {
 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 		'MunifTanjim/nui.nvim',
@@ -15,7 +12,7 @@ return {
 		--   If not available, we use `mini` as the fallback
 		-- 'rcarriga/nvim-notify',
 	},
-	config = {
+	opts = {
 		lsp = {
 			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 			override = {

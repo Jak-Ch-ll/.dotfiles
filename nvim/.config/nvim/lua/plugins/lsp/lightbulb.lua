@@ -1,7 +1,7 @@
 return {
 	'kosayoda/nvim-lightbulb',
 	event = 'VeryLazy',
-	config = {
+	opts = {
 		autocmd = {
 			enabled = true,
 		},

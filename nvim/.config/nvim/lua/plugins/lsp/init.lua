@@ -13,7 +13,7 @@ return {
 			'antosha417/nvim-lsp-file-operations',
 		},
 
-		config = function()
+		init = function()
 			local mason = require('mason-lspconfig')
 			local lspconfig = require('lspconfig')
 			local utils = require('utils')
