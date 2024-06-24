@@ -9,6 +9,8 @@ return {
 
 			'hrsh7th/nvim-cmp',
 			'hrsh7th/cmp-nvim-lsp',
+
+			'antosha417/nvim-lsp-file-operations',
 		},
 
 		config = function()
@@ -17,7 +19,11 @@ return {
 			local utils = require('utils')
 
 			local on_attach = require('utils/lsp/on-attach')
-			local capabilities = require('cmp_nvim_lsp').default_capabilities()
+			local capabilities = vim.tbl_deep_extend(
+				'force',
+				require('cmp_nvim_lsp').default_capabilities(),
+				require('lsp-file-operations').default_capabilities()
+			)
 			local shared_options = {
 				on_attach = on_attach,
 				capabilities = capabilities,
