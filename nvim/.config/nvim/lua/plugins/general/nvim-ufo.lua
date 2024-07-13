@@ -4,7 +4,7 @@ return {
 	'kevinhwang91/nvim-ufo',
 	dependencies = {
 		'kevinhwang91/promise-async',
-		'Treesitter',
+		'nvim-treesitter/nvim-treesitter',
 		{
 			-- https://github.com/kevinhwang91/nvim-ufo/issues/4#issuecomment-1512772530
 			'luukvbaal/statuscol.nvim',
