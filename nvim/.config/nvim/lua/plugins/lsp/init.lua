@@ -37,35 +37,6 @@ return {
 				end
 			end
 
-			-- Workaround for truncating long TypeScript inlay hints.
-			-- Blatenly stolen from https://github.com/MariaSolOs/dotfiles/blob/02af18f67d60977023c35b8302c0cfd1abbe0f96/.config/nvim/lua/lsp.lua#L266m
-			-- TODO: Remove this once there is a native solution (https://github.com/neovim/neovim/issues/27240)
-			local methods = vim.lsp.protocol.Methods
-			local inlay_hint_handler =
-				vim.lsp.handlers[methods.textDocument_inlayHint]
-			vim.lsp.handlers[methods.textDocument_inlayHint] = function(
-				err,
-				result,
-				ctx,
-				config
-			)
-				local client = vim.lsp.get_client_by_id(ctx.client_id)
-				if client and client.name == 'volar' then
-					result = vim.iter(result)
-						:map(function(hint)
-							local label = hint.label ---@type string
-							if label:len() >= 30 then
-								label = label:sub(1, 29) .. '…'
-							end
-							hint.label = label
-							return hint
-						end)
-						:totable()
-				end
-
-				inlay_hint_handler(err, result, ctx, config)
-			end
-
 			-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
 			mason.setup_handlers({
 				setup_with_options(),
@@ -205,6 +176,7 @@ return {
 							enableMoveToFileCodeAction = true,
 							experimental = {
 
+								-- Keep an eye on: https://github.com/neovim/neovim/issues/27240)
 								maxInlayHintLength = 30,
 								completion = {
 									enableServerSideFuzzyMatch = true,
