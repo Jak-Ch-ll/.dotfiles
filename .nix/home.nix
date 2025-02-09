@@ -1,5 +1,11 @@
-{ pkgs, ... }: {
-  imports = [ ./apps/git.nix ./apps/fzf.nix ./apps/neovim.nix ./apps/tmux.nix ];
+{ pkgs, ... }:
+{
+  imports = [
+    ./apps/git.nix
+    ./apps/fzf.nix
+    ./apps/neovim.nix
+    ./apps/tmux.nix
+  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -64,8 +70,12 @@
         disabled = false;
         fish_indicator = "🐟";
       };
-      nix_shell = { format = "$symbol"; };
-      status = { disabled = false; };
+      nix_shell = {
+        format = "$symbol";
+      };
+      status = {
+        disabled = false;
+      };
     };
   };
 
@@ -140,8 +150,10 @@
     '';
   };
   programs.zellij = {
-    enable = true;
-    settings = { default_shell = "fish"; };
+    enable = false;
+    settings = {
+      default_shell = "fish";
+    };
   };
   programs.nushell = {
     enable = true;
@@ -153,6 +165,9 @@
   # enable flakes
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 }
