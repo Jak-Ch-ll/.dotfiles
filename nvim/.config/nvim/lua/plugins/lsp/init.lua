@@ -233,26 +233,18 @@ return {
 								},
 							},
 						},
+						-- Inlay hints in Vue files temporary disabled because of this
+						-- issue: https://github.com/neovim/neovim/issues/32248
 						javascript = {
-							inlayHints = {
-								parameterNames = { enabled = 'literals' },
-								parameterTypes = { enabled = true },
-								variableTypes = { enabled = true },
-								propertyDeclarationTypes = { enabled = true },
-								functionLikeReturnTypes = { enabled = true },
-								enumMemberValues = { enabled = true },
-							},
+							-- inlayHints = {
+							-- 	parameterNames = { enabled = 'literals' },
+							-- 	parameterTypes = { enabled = true },
+							-- 	variableTypes = { enabled = true },
+							-- 	propertyDeclarationTypes = { enabled = true },
+							-- 	functionLikeReturnTypes = { enabled = true },
+							-- 	enumMemberValues = { enabled = true },
+							-- },
 						},
-						-- vue = {
-						-- 	inlayHints = {
-						-- 		parameterNames = { enabled = 'literals' },
-						-- 		parameterTypes = { enabled = true },
-						-- 		variableTypes = { enabled = true },
-						-- 		propertyDeclarationTypes = { enabled = true },
-						-- 		functionLikeReturnTypes = { enabled = true },
-						-- 		enumMemberValues = { enabled = true },
-						-- 	},
-						-- },
 					},
 				}),
 
@@ -279,10 +271,11 @@ return {
 							inlayHints = {
 								destructuredProps = true,
 								missingProps = true,
-								inlineHandlerLeading = true,
-								optionsWrapper = true,
+
+								optionsWrapper = false,
+								inlineHandlerLeading = false,
 								vBindShorthand = false,
-								includeInlayVariableTypeHints = true,
+								includeInlayVariableTypeHints = false,
 							},
 						},
 					},
