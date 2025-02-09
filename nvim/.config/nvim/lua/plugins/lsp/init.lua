@@ -157,6 +157,7 @@ return {
 
 				['vtsls'] = setup_with_options({
 					filetypes = { 'vue', 'typescript', 'javascript' },
+					cmd = { 'bunx', '--bun', 'vtsls', '--stdio' },
 					settings = {
 						vtsls = {
 							tsserver = {
@@ -175,7 +176,6 @@ return {
 							},
 							enableMoveToFileCodeAction = true,
 							experimental = {
-
 								-- Keep an eye on: https://github.com/neovim/neovim/issues/27240)
 								maxInlayHintLength = 30,
 								completion = {
@@ -221,7 +221,7 @@ return {
 				}),
 
 				['volar'] = setup_with_options({
-					-- filetypes = { 'vue', 'typescript', 'javascript' },
+					cmd = { 'bunx', '--bun', 'vue-language-server', '--stdio' },
 					init_options = {
 						vue = {
 							hybridMode = true,
@@ -229,9 +229,6 @@ return {
 					},
 					settings = {
 						vue = {
-							-- server = {
-							-- 	hybridMode = true,
-							-- },
 							complete = {
 								casing = {
 									props = 'autoCamel',

@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 {
   programs.neovim = {
     enable = true;
@@ -7,6 +11,7 @@
     extraPackages = with pkgs; [
       # Copilot & Mason
       nodejs_20
+      bun
 
       # telescope-fzf
       gnumake
@@ -27,7 +32,8 @@
   };
 
   home.file = {
-    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
   };
 
   # https://github.com/yyx990803/launch-editor?tab=readme-ov-file#custom-editor-support
