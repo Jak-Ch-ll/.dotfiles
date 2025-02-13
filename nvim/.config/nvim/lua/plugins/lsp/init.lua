@@ -5,8 +5,6 @@ return {
 		event = 'VeryLazy',
 
 		dependencies = {
-			'williamboman/mason-lspconfig.nvim',
-
 			'hrsh7th/nvim-cmp',
 			'hrsh7th/cmp-nvim-lsp',
 
@@ -14,11 +12,9 @@ return {
 		},
 
 		init = function()
-			local mason = require('mason-lspconfig')
 			local lspconfig = require('lspconfig')
-			local utils = require('utils')
-
 			local on_attach = require('utils/lsp/on-attach')
+
 			local capabilities = vim.tbl_deep_extend(
 				'force',
 				require('cmp_nvim_lsp').default_capabilities(),
@@ -29,19 +25,46 @@ return {
 				capabilities = capabilities,
 			}
 
-			local function setup_with_options(options)
-				return function(server_name)
-					lspconfig[server_name].setup(
-						utils.merge(shared_options, options)
-					)
-				end
-			end
+			local servers = {
+				cssls = {},
 
-			-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v1.x/doc/md/lsp.md#you-might-not-need-lsp-zero
-			mason.setup_handlers({
-				setup_with_options(),
+				emmet_language_server = {
+					filetypes = {
+						'html',
+						'css',
+						'scss',
+					},
+				},
 
-				['lua_ls'] = setup_with_options({
+				eslint = {},
+				docker_compose_language_service = {},
+				dockerls = {},
+				gitlab_ci_ls = {},
+				html = {},
+
+				jsonls = {
+					settings = {
+						json = {
+							schemas = require('schemastore').json.schemas(),
+							validate = { enable = true },
+						},
+					},
+				},
+
+				yamlls = {
+					settings = {
+						yaml = {
+							-- https://github.com/b0o/SchemaStore.nvim?tab=readme-ov-file#usage
+							schemaStore = {
+								enable = false,
+								url = '',
+							},
+							schemas = require('schemastore').yaml.schemas(),
+						},
+					},
+				},
+
+				lua_ls = {
 					on_init = function(client)
 						local path = client.workspace_folders[1].name
 						if
@@ -83,49 +106,9 @@ return {
 							},
 						},
 					},
-				}),
+				},
 
-				-- ['rust_analyzer'] = function()
-				--     require('rust-tools').setup({
-				--         server = utils.merge(
-				--             shared_options,
-				--             {
-				--                 settings = {
-				--                     ["rust-analyzer"] = {
-				--                         checkOnSave = {
-				--                             command = "clippy"
-				--                         }
-				--                     }
-				--                 }
-				--             }
-				--         )
-				--     })
-				-- end,
-
-				-- ['tsserver'] = function()
-				-- 	require('typescript').setup({
-				-- 		server = utils.merge(
-				-- 			shared_options,
-				-- 			{
-				-- 				settings = {
-				-- 					typescript = {
-				-- 						inlayHints = {
-				-- 							includeInlayEnumMemberValueHints = true,
-				-- 							includeInlayFunctionLikeReturnTypeHints = true,
-				-- 							includeInlayFunctionParameterTypeHints = true,
-				-- 							includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-				-- 							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-				-- 							includeInlayPropertyDeclarationTypeHints = true,
-				-- 							includeInlayVariableTypeHints = true,
-				-- 						},
-				-- 					},
-				-- 				}
-				-- 			}
-				-- 		)
-				-- 	})
-				-- end,
-
-				['svelte'] = setup_with_options({
+				svelte = {
 					settings = {
 						typescript = {
 							inlayHints = {
@@ -153,9 +136,39 @@ return {
 							},
 						},
 					},
-				}),
+				},
 
-				['vtsls'] = setup_with_options({
+				volar = {
+					cmd = { 'bunx', '--bun', 'vue-language-server', '--stdio' },
+					init_options = {
+						vue = {
+							hybridMode = true,
+						},
+					},
+					settings = {
+						vue = {
+							complete = {
+								casing = {
+									props = 'autoCamel',
+								},
+								autoInsert = {
+									dotValue = true,
+								},
+							},
+							inlayHints = {
+								destructuredProps = true,
+								missingProps = true,
+
+								optionsWrapper = false,
+								inlineHandlerLeading = false,
+								vBindShorthand = false,
+								includeInlayVariableTypeHints = false,
+							},
+						},
+					},
+				},
+
+				vtsls = {
 					filetypes = { 'vue', 'typescript', 'javascript' },
 					cmd = { 'bunx', '--bun', 'vtsls', '--stdio' },
 					settings = {
@@ -164,10 +177,13 @@ return {
 								globalPlugins = {
 									{
 										name = '@vue/typescript-plugin',
-										location = require('mason-registry')
-											.get_package('vue-language-server')
-											:get_install_path()
-											.. '/node_modules/@vue/language-server',
+										location = vim.fs.root(
+											vim.fn.exepath(
+												'vue-language-server'
+											),
+											'bin'
+										)
+											.. '/lib/node_modules/@vue/language-server',
 										languages = { 'vue' },
 										configNamespace = 'typescript',
 										enableForWorkspaceTypeScriptVersions = true,
@@ -218,80 +234,24 @@ return {
 							-- },
 						},
 					},
-				}),
+				},
+			}
 
-				['volar'] = setup_with_options({
-					cmd = { 'bunx', '--bun', 'vue-language-server', '--stdio' },
-					init_options = {
-						vue = {
-							hybridMode = true,
-						},
-					},
-					settings = {
-						vue = {
-							complete = {
-								casing = {
-									props = 'autoCamel',
-								},
-								autoInsert = {
-									dotValue = true,
-								},
-							},
-							inlayHints = {
-								destructuredProps = true,
-								missingProps = true,
-
-								optionsWrapper = false,
-								inlineHandlerLeading = false,
-								vBindShorthand = false,
-								includeInlayVariableTypeHints = false,
-							},
-						},
-					},
-				}),
-
-				['jsonls'] = function(server_name)
-					setup_with_options({
-						settings = {
-							json = {
-								schemas = require('schemastore').json.schemas(),
-								validate = { enable = true },
-							},
-						},
-					})(server_name)
-				end,
-
-				['emmet_language_server'] = setup_with_options({
-					filetypes = {
-						'html',
-						'css',
-						'scss',
-					},
-				}),
-			})
+			local function setup_servers()
+				for server_name, options in pairs(servers) do
+					local server_options = type(options) == 'function'
+							and options(server_name)
+						or options
+					lspconfig[server_name].setup(
+						vim.tbl_deep_extend(
+							'force',
+							shared_options,
+							server_options
+						)
+					)
+				end
+			end
+			setup_servers()
 		end,
 	},
 }
-
--- other language plugins
--- sigmaSd/deno-nvim
-
--- svelte = {
---     config = {
---         settings = {
---             svelte = {
---                 useNewTransformation = true
---             }
---         }
---     }
--- },
--- html = {
---     config = {
---         filetypes = { 'html', 'svelte' }
---     }
--- },
--- tailwindcss = {
---     config = {
---         root_dir = require('lspconfig').util.root_pattern('tailwind.config.js')
---     }
--- },

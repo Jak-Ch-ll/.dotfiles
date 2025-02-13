@@ -18,13 +18,28 @@
       clang_multi
 
       # Language Stuff
+
       ## Nix
       nixfmt-rfc-style
-      ## JS/TS
-      typescript
-      prettierd
+
       ## Lua
       stylua
+      lua-language-server
+
+      ## Web Dev
+      emmet-language-server
+      prettierd
+      svelte-language-server
+      typescript
+      vue-language-server
+      vscode-langservers-extracted # provides css, eslint, html, json, markdown
+      vtsls
+
+      ## Devops
+      docker-compose-language-service
+      dockerfile-language-server-nodejs
+      gitlab-ci-ls
+      yaml-language-server
 
       # Misc
       tree-sitter
