@@ -43,6 +43,7 @@
 
       # Misc
       tree-sitter
+      xclip
     ];
   };
 
