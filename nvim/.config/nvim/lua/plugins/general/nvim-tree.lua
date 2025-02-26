@@ -132,6 +132,10 @@ return {
 				prefix = '',
 				always_show_folders = false,
 			},
+
+			filters = {
+				git_ignored = false,
+			},
 		},
 
 		init = function()
