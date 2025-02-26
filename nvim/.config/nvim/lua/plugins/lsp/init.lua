@@ -25,6 +25,10 @@ return {
 				capabilities = capabilities,
 			}
 
+			vim.filetype.add({
+				filename = { ['.gitlab-ci.yml'] = 'yaml.gitlab' },
+			})
+
 			local servers = {
 				cssls = {},
 
