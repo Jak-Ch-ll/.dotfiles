@@ -19,7 +19,7 @@ if git -C $directory rev-parse 2>/dev/null; then
         fi
 
         directory=${worktree%% *}
-        session_name="$session_name ${worktree##* }"
+        session_name="$session_name (/$(basename $directory))"
     fi
 fi
 
