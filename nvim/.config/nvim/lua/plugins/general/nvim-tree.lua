@@ -104,6 +104,11 @@ return {
 				icons = {
 					git_placement = 'after',
 					modified_placement = 'before',
+					glyphs = {
+						git = {
+							ignored = ' ',
+						},
+					},
 				},
 				symlink_destination = false,
 			},
