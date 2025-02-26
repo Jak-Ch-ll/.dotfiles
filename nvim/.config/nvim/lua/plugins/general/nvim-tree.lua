@@ -87,6 +87,7 @@ return {
 			},
 
 			renderer = {
+				highlight_git = 'all',
 				add_trailing = true,
 				group_empty = true,
 				indent_width = 4,
