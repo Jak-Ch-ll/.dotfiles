@@ -1,5 +1,6 @@
-require "jak-ch-ll/sets"
-require "jak-ch-ll/keymaps"
-require "jak-ch-ll/autocmds"
-require "jak-ch-ll/lazy"
-require "jak-ch-ll/commands"
+require('jak-ch-ll/sets')
+require('jak-ch-ll/keymaps')
+require('jak-ch-ll/autocmds')
+require('jak-ch-ll/lazy')
+require('jak-ch-ll/commands')
+require('jak-ch-ll/diagnostics')
