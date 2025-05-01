@@ -5,7 +5,7 @@ return {
 
 	-- Misc
 	{ 'tpope/vim-surround', event = 'VeryLazy' },
-	{ 'tpope/vim-sleuth', event = 'VeryLazy' },
+	{ 'tpope/vim-sleuth', lazy = false },
 	{ 'lukas-reineke/indent-blankline.nvim', event = 'VeryLazy' },
 	-- 'Raimondi/delimitMate',
 	'stephenway/postcss.vim',
