@@ -72,7 +72,6 @@ local function shared_on_attach(client, bufnr)
 		'[C]ode [A]ction'
 	)
 
-	nmap('gh', vim.lsp.buf.hover, '[G]oto [H]over documentation')
 	nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 	nmap('gt', vim.lsp.buf.type_definition, '[G]oto [T]ype definition')
 	nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')

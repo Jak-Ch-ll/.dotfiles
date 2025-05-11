@@ -40,3 +40,21 @@ map('x', 'p', '"_dP')
 
 -- vim.keymap.set('n', '<C-j>', ':cnext<CR>')
 -- vim.keymap.set('n', '<C-k>', ':cprev<CR>')
+
+local set_keymaps = require('jak-ch-ll.utils.set_keymaps')
+
+set_keymaps({
+	{
+		'gh',
+		function()
+			vim.print('gh')
+			local bufnr, winid = vim.diagnostic.open_float()
+			if bufnr then
+				return
+			end
+
+			vim.lsp.buf.hover()
+		end,
+		'[G]oto [H]over diagnostics or documentation',
+	},
+})
