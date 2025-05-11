@@ -1,0 +1,13 @@
+{
+  "fn": {
+    "prefix": "fn",
+    "body": ["function $1($2) {", "\t$3", "}"],
+    "description": "Function definition"
+  },
+
+  "imp": {
+    "prefix": "imp",
+    "body": ["import $2 from '$1'"],
+    "description": "Import statement"
+  }
+}
