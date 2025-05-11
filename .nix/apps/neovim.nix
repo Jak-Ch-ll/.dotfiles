@@ -41,6 +41,9 @@
       gitlab-ci-ls
       yaml-language-server
 
+      ## Go
+      gopls
+
       # Misc
       tree-sitter
       xclip

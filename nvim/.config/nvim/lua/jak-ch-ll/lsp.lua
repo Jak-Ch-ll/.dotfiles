@@ -16,6 +16,7 @@ vim.lsp.enable({
 	'docker_compose_language_service',
 	'dockerls',
 	'gitlab_ci_ls',
+	'gopls',
 	'html',
 	'jsonls',
 	'yamlls',
