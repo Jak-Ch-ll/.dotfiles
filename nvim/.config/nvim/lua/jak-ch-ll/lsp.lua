@@ -5,10 +5,6 @@ vim.lsp.config('*', {
 	capabilities = require('lsp-file-operations').default_capabilities(),
 })
 
-vim.filetype.add({
-	filename = { ['.gitlab-ci.yml'] = 'yaml.gitlab' },
-})
-
 vim.lsp.enable({
 	'cssls',
 	'emmet_language_server',
