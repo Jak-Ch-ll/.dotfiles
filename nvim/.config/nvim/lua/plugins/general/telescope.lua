@@ -108,6 +108,7 @@ return {
 					-- custom changes
 					'--hidden',
 				},
+				layout_strategy = 'vertical',
 			},
 			pickers = {
 				buffers = {
