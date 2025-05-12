@@ -10,6 +10,8 @@ return {
 		'typescript.tsx',
 		'vue',
 	},
+	-- root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
+	root_markers = { 'tsconfig.json' },
 	settings = {
 		vtsls = {
 			tsserver = {
