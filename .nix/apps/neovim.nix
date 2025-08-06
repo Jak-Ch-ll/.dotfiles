@@ -20,6 +20,7 @@
       # Language Stuff
 
       ## Nix
+      nixd
       nixfmt-rfc-style
 
       ## Lua

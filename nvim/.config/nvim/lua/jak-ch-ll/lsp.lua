@@ -21,6 +21,7 @@ vim.lsp.enable({
 	'jsonls',
 	'yamlls',
 	'lua_ls',
+	'nixd',
 	'svelte',
 	'volar',
 	'vtsls',
