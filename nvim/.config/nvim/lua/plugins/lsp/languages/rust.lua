@@ -1,9 +1,5 @@
 return {
-    'simrat39/rust-tools.nvim',
-    ft = "rust",
-    dependencies = {
-        'neovim/nvim-lspconfig',
-        'nvim-lua/plenary.nvim',
-        'mfussenegger/nvim-dap',
-    },
+	'mrcjkb/rustaceanvim',
+	version = '^6',
+	lazy = false, -- This plugin is already lazy
 }

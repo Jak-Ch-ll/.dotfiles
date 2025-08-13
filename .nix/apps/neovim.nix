@@ -42,6 +42,10 @@
       gitlab-ci-ls
       yaml-language-server
 
+      ## Rust
+      rust-analyzer
+      rustfmt
+
       ## Go
       gopls
 
