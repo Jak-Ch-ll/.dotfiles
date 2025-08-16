@@ -25,5 +25,8 @@ return {
 			right_pad = 1,
 			width = 'block',
 		},
+
+		-- disable latex warning
+		latex = { enabled = false },
 	},
 }
