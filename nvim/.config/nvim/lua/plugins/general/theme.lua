@@ -25,13 +25,15 @@ return {
 				comments = { italic = true },
 				keywords = { italic = false },
 			},
-			on_highlights = function(highlights, _colors)
+			on_highlights = function(highlights, colors)
 				-- Replace undercurl with underline
 				-- https://github.com/folke/tokyonight.nvim/discussions/303#discussioncomment-4808330
 				highlights.DiagnosticUnderlineWarn.undercurl = nil
 				highlights.DiagnosticUnderlineError.undercurl = nil
 				highlights.DiagnosticUnderlineWarn.underline = true
 				highlights.DiagnosticUnderlineError.underline = true
+
+				highlights.cursorline = { bg = colors.bg_dark }
 			end,
 		},
 		init = function()

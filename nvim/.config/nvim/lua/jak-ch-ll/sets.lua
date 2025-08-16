@@ -51,3 +51,5 @@ vim.opt.conceallevel = 2
 vim.o.textwidth = 80
 
 vim.opt.winborder = 'rounded'
+
+vim.o.cursorline = true
