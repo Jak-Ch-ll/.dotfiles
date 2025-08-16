@@ -28,6 +28,17 @@ return {
 			desc = '[C-p] Project files',
 		},
 		{
+			'ff',
+			custom_find_files,
+			desc = '[F]ind [F]iles',
+		},
+		{
+			'<leader><leader>',
+			function()
+				require('telescope.builtin').commands()
+			end,
+		},
+		{
 			'<leader>sc',
 			function()
 				require('telescope.builtin').commands()
