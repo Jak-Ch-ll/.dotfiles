@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 require('jak-ch-ll.sets')
 require('jak-ch-ll.keymaps')
 require('jak-ch-ll.autocmds')
