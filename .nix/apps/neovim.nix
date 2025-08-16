@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  tree-sitter-cli-custom,
   ...
 }:
 {
@@ -55,7 +56,7 @@
       gopls
 
       # Misc
-      tree-sitter
+      tree-sitter-cli-custom # for v0.26
       xclip
     ];
   };

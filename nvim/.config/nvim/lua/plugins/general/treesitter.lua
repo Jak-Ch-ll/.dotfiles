@@ -1,56 +1,47 @@
+---@module 'lazy'
+---@type LazySpec
 return {
 	'nvim-treesitter/nvim-treesitter',
-	build = function()
-		require('nvim-treesitter.install').update({ with_sync = true })()
-	end,
+	lazy = false,
+	build = ':TSUpdate',
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-context',
-		{ 'windwp/nvim-ts-autotag', config = true },
+		{ 'windwp/nvim-ts-autotag', config = true, lazy = false },
 	},
-	main = 'nvim-treesitter.configs',
-	opts = {
-		ensure_installed = {
-			-- come pre-installed with Neovim and might create issues if not
-			-- installed with Treesitter as well
-			'bash',
-			'c',
-			'lua',
-			'markdown',
-			'python',
-			'vim',
-			'query',
-			'vimdoc',
+	config = function()
+		local ts = require('nvim-treesitter')
 
-			'rust',
-			'go',
+		-- install all
+		ts.install(ts.get_available())
 
-			'javascript',
-			'typescript',
-			'html',
-			'css',
-			'jsdoc',
-			'vue',
-			'svelte',
+		-- https://github.com/MeanderingProgrammer/treesitter-modules.nvim#implementing-yourself
+		vim.api.nvim_create_autocmd('FileType', {
+			group = vim.api.nvim_create_augroup('treesitter.setup', {}),
+			callback = function(args)
+				local buf = args.buf
+				local filetype = args.match
 
-			'json',
-			'yaml',
-			'markdown',
-		},
+				local language = vim.treesitter.language.get_lang(filetype)
+					or filetype
+				if not vim.treesitter.language.add(language) then
+					return
+				end
 
-		auto_install = true,
+				-- enable highlighting
+				vim.treesitter.start(buf, language)
 
-		highlight = {
-			enable = true,
-		},
+				vim.wo.foldmethod = 'expr'
+				vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
-		indent = {
-			enable = true,
-		},
-	},
+				vim.bo[buf].indentexpr =
+					"v:lua.require'nvim-treesitter'.indentexpr()"
+			end,
+		})
+	end,
 	init = function()
 		vim.filetype.add({
 			extension = {
-				mdx = 'markdown',
+				mdx = 'markdown.mdx',
 			},
 		})
 	end,

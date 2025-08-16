@@ -39,7 +39,29 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "tree-sitter-flake": "tree-sitter-flake"
+      }
+    },
+    "tree-sitter-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775022856,
+        "narHash": "sha256-lVrM0RFXlNyKZat5TFUU0MFYv/uuEP1uS5UGL96a71g=",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter",
+        "rev": "89f553c2e9572cc443dff7571d8bd50f941ba39e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tree-sitter",
+        "ref": "release-0.26",
+        "repo": "tree-sitter",
+        "type": "github"
       }
     }
   },
