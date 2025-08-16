@@ -1,0 +1,78 @@
+{
+  flake.homeModules.git =
+    { lib, ... }:
+    let
+      aliases = {
+        gb = "git branch --format='%(HEAD) %(refname:short) %(color:green)(%(committerdate:relative)) %(color:blue)[%(authorname)]' --sort=-committerdate";
+        gg = "git log --graph --simplify-by-decoration --pretty=format:'%d' --all";
+        gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit";
+        gs = "git status";
+        gu = "git push";
+        gr = "git rebase";
+        gra = "git rebase --abort";
+        grc = "git rebase --continue";
+        lg = "lazygit";
+
+        js = "jj st";
+        jl = "jj log -n 10";
+        jb = "jj bookmark list";
+        je = "jj edit";
+        jd = "jj diff";
+
+      };
+    in
+    {
+      home.shellAliases = lib.mkMerge [
+        aliases
+        { gbs = "git branch | fzf | xargs git switch"; }
+      ];
+      programs.nushell = {
+        shellAliases = aliases;
+        extraConfig = "def gbs [] { git branch | fzf | xargs git switch }";
+      };
+
+      programs.git = {
+        enable = true;
+
+        settings = {
+          init = {
+            defaultBranch = "main";
+          };
+
+          alias = {
+            save = "!git add -A && git commit -m '🚧 Savepoint'";
+            load = "reset HEAD~";
+          };
+        };
+      };
+
+      programs.difftastic = {
+        enable = true;
+        git = {
+          enable = true;
+          mode = "both";
+        };
+      };
+
+      programs.delta = {
+        enable = true;
+      };
+
+      programs.lazygit = {
+        enable = true;
+        settings = {
+          git = {
+            pagers = [
+              {
+                externalDiffCommand = "difft --color=always";
+              }
+              {
+                colorArg = "always";
+                pager = "delta --dark --paging=never";
+              }
+            ];
+          };
+        };
+      };
+    };
+}
