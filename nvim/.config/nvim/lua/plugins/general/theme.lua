@@ -34,6 +34,8 @@ return {
 				highlights.DiagnosticUnderlineError.underline = true
 
 				highlights.cursorline = { bg = colors.bg_dark }
+
+				highlights.debugPC = { bg = colors.bg_highlight }
 			end,
 		},
 		init = function()

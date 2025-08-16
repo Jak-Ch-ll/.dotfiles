@@ -1,217 +1,118 @@
--- links:
--- https://github.com/mfussenegger/nvim-dap
---
+---@module 'lazy'
+---@type LazySpec
 return {
-	'mfussenegger/nvim-dap',
-	enabled = false,
+	'https://github.com/mfussenegger/nvim-dap',
+	enabled = true,
 	dependencies = {
-		'mxsdev/nvim-dap-vscode-js',
-		'theHamsta/nvim-dap-virtual-text',
-		'rcarriga/nvim-dap-ui',
-	},
-	keys = {
+		{
+			'https://github.com/theHamsta/nvim-dap-virtual-text',
+			config = true,
+		},
+		{
+			-- Docs: https://igorlfs.github.io/nvim-dap-view
+			'https://github.com/igorlfs/nvim-dap-view',
+			version = '1.*',
 
+			---@module 'dap-view'
+			---@type dapview.Config
+			opts = {
+				auto_toggle = true,
+
+				windows = {
+					position = 'right',
+					size = 0.5,
+					terminal = {
+						position = 'below',
+					},
+				},
+
+				winbar = {
+					controls = {
+						enabled = true,
+					},
+				},
+			},
+		},
+	},
+
+	keys = {
 		{
 			'<F5>',
 			function()
-				-- require("dap.ext.vscode").load_launchjs(nil, { edge = { "typescript" } })
-				print("I'm debugging!")
-				-- require("dap.ext.vscode").load_launchjs()
 				require('dap').continue()
 			end,
 			desc = '[F5] Continue',
 		},
-		{ '<F1>', ':lua require("dap").step_into()<CR>' },
-		{ '<F2>', ':lua require("dap").step_over()<CR>' },
-		{ '<F3>', ':lua require("dap").step_out()<CR>' },
-		{ '<leader>tb', ':lua require("dap").toggle_breakpoint()<CR>' },
+		{
+			'<F1>',
+			function()
+				require('dap').step_into()
+			end,
+			desc = '[F1] Step Into',
+		},
+		{
+			'<F2>',
+			function()
+				require('dap').step_over()
+			end,
+			desc = '[F2] Step Over',
+		},
+		{
+			'<F3>',
+			function()
+				require('dap').step_out()
+			end,
+			desc = '[F3] Step Out',
+		},
+		{
+			'<leader>tb',
+			function()
+				require('dap').toggle_breakpoint()
+			end,
+			desc = 'Toggle Breakpoint',
+		},
 		{
 			'<leader>tB',
-			':lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>',
+			function()
+				require('dap').set_breakpoint(
+					vim.fn.input('Breakpoint condition: ')
+				)
+			end,
+			desc = 'Set Breakpoint with Condition',
 		},
 		{
 			'<leader>lp',
-			':lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>',
+			function()
+				require('dap').set_breakpoint(
+					vim.fn.input('Log point message: ')
+				)
+			end,
+			desc = 'Set Log Point',
 		},
 	},
-	init = function()
-		print('dap setup')
-		require('nvim-dap-virtual-text').setup({})
-		require('dapui').setup()
 
-		-- open and close dap-ui automatically
-		local dap = require('dap')
-		local dapui = require('dapui')
-		dap.listeners.after.event_initialized['dapui_config'] = function()
-			dapui.open({})
-		end
-		dap.listeners.before.event_terminated['dapui_config'] = function()
-			dapui.close({})
-		end
-		dap.listeners.before.event_exited['dapui_config'] = function()
-			dapui.close({})
-		end
-
-		-- require("dap-vscode-js").setup({
-		--     adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
-		--     debugger_cmd = { "js-debug-adapter" },
-		-- })
-		--
-		-- for _, language in ipairs({ "typescript", "javascript" }) do
-		--     require("dap").configurations[language] = {
-		--         {
-		--             type = "pwa-node",
-		--             request = "launch",
-		--             name = "Launch file",
-		--             program = "${file}",
-		--             cwd = "${workspaceFolder}",
-		--         },
-		--         {
-		--             type = "pwa-node",
-		--             request = "attach",
-		--             name = "Attach",
-		--             processId = require 'dap.utils'.pick_process,
-		--             cwd = "${workspaceFolder}",
-		--         }
-		--     }
-		--
-		-- end
-
-		dap.adapters['pwa-node'] = {
-			type = 'server',
-			host = 'localhost',
-			port = '${port}',
-			executable = {
-				command = 'js-debug-adapter',
-				args = { '${port}' },
+	config = function()
+		vim.fn.sign_define({
+			{
+				name = 'DapBreakpoint',
+				text = '',
+				texthl = 'Title',
 			},
-		}
-
-		dap.adapters['pwa-msedge'] = {
-			type = 'server',
-			-- host = "172.17.32.1",
-			host = 'DESKTOP-MFFQGHD.local',
-			-- host = "localhost",
-			port = '${port}',
-			executable = {
-				command = 'js-debug-adapter',
-				args = { '${port}' },
+			{
+				name = 'DapBreakpointCondition',
+				text = '',
+				texthl = 'Title',
 			},
-		}
-
-		dap.adapters['edge'] = {
-			type = 'server',
-			-- host = "172.17.32.1",
-			-- host = "${env:hostname}.local",
-			host = 'DESKTOP-MFFQGHD.local',
-			-- host = "localhost",
-			port = '${port}',
-			executable = {
-				command = 'js-debug-adapter',
-				args = { '${port}' },
+			{
+				name = 'DapLogPoint',
+				text = '',
+				texthl = 'Title',
 			},
-		}
-
-		dap.adapters['chrome'] = {
-			type = 'server',
-			-- host = "172.17.32.1",
-			host = 'localhost',
-			port = '${port}',
-			executable = {
-				command = 'js-debug-adapter',
-				args = { '${port}' },
+			{
+				name = 'DapBreakpointRejected',
+				text = '',
+				texthl = 'ErrorMsg',
 			},
-		}
-
-		for _, language in ipairs({ 'typescript', 'javascript' }) do
-			dap.configurations[language] = {
-				{
-					type = 'edge',
-					request = 'attach',
-					port = 9222,
-					name = 'Attach to Edge',
-					-- hostName = "${env:hostname}.local",
-					-- url = "http://localhost:5173/*",
-					-- webRoot = "${workspaceFolder}",
-				},
-				{
-					type = 'pwa-node',
-					request = 'launch',
-					name = 'Launch file',
-					program = '${file}',
-					runtimeExecutable = 'vite-node',
-					cwd = '${workspaceFolder}',
-				},
-				{
-					type = 'pwa-node',
-					request = 'attach',
-					name = 'Attach',
-					processId = require('dap.utils').pick_process,
-					cwd = '${workspaceFolder}',
-				},
-			}
-		end
-
-		-- dap.configurations.typescript = {
-		--     {
-		--         type = "pwa-node",
-		--         request = "launch",
-		--         name = "Launch file",
-		--         program = "${file}",
-		--         runtimeExecutable = "vite-node",
-		--         cwd = "${workspaceFolder}",
-		--     },
-		-- }
-
-		-- require("dap-vscode-js").setup({
-		--     node_path = "vite-node",
-		--     debugger_cmd = { "js-debug-adapter" },
-		--     adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
-		-- })
-
-		-- for _, language in ipairs({ "typescript", "javascript" }) do
-		--     dap.configurations[language] = {
-		--         {
-		--             type = "pwa-node",
-		--             request = "launch",
-		--             name = "Launch file",
-		--             program = "${file}",
-		--             runtimeExecutable = "vite-node",
-		--             cwd = "${workspaceFolder}",
-		--         },
-		--         {
-		--             type = "pwa-node",
-		--             request = "attach",
-		--             name = "Attach",
-		--             processId = require 'dap.utils'.pick_process,
-		--             cwd = "${workspaceFolder}",
-		--         }
-		--     }
-		-- end
-
-		-- require("dap-vscode-js").setup({
-		--     debugger_cmd = { "js-debug-adapter" },
-		-- })
-		--
-		--
-		-- for _, language in ipairs({ "typescript", "javascript" }) do
-		--     dap.configurations[language] = {
-		--         {
-		--             type = "pwa-node",
-		--             request = "launch",
-		--             name = "Launch file",
-		--             program = "${file}",
-		--             runtimeExecutable = "vite-node",
-		--             cwd = "${workspaceFolder}",
-		--         },
-		--         {
-		--             type = "pwa-node",
-		--             request = "attach",
-		--             name = "Attach",
-		--             processId = require 'dap.utils'.pick_process,
-		--             cwd = "${workspaceFolder}",
-		--         }
-		--     }
-		-- end
+		})
 	end,
 }

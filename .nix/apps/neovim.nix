@@ -51,6 +51,7 @@
       ## Rust
       rust-analyzer
       rustfmt
+      vscode-extensions.vadimcn.vscode-lldb.adapter
 
       ## Go
       gopls
@@ -66,10 +67,12 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim/.config/nvim";
   };
 
-  # https://github.com/yyx990803/launch-editor?tab=readme-ov-file#custom-editor-support
+  # $TERM: https://github.com/wezterm/wezterm/issues/415#issuecomment-756155971
+  # other stuff: https://github.com/yyx990803/launch-editor?tab=readme-ov-file#custom-editor-support
   home = {
     shellAliases = {
-      vim = "nvim --listen ./nvim.pipe";
+      # vim = "TERM=wezterm nvim --listen ./nvim.pipe";
+      vim = "TERM=wezterm nvim";
     };
     sessionVariables = {
       LAUNCH_EDITOR = "open-in-neovim.sh";
