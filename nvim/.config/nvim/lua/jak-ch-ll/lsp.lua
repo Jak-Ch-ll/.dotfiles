@@ -19,6 +19,6 @@ vim.lsp.enable({
 	'lua_ls',
 	'nixd',
 	'svelte',
-	'volar',
 	'vtsls',
+	'vue_ls',
 })

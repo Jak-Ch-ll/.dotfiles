@@ -10,8 +10,8 @@ return {
 		'typescript.tsx',
 		'vue',
 	},
-	-- root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
 	root_markers = { 'tsconfig.json' },
+
 	settings = {
 		vtsls = {
 			tsserver = {
@@ -21,7 +21,7 @@ return {
 						location = vim.fs.root(
 							vim.fn.exepath('vue-language-server'),
 							'bin'
-						) .. '/lib/node_modules/@vue/language-server',
+						) .. '/lib/language-tools/packages/language-server',
 						languages = { 'vue' },
 						configNamespace = 'typescript',
 						enableForWorkspaceTypeScriptVersions = true,
@@ -30,7 +30,7 @@ return {
 			},
 			enableMoveToFileCodeAction = true,
 			experimental = {
-				-- Keep an eye on: https://github.com/neovim/neovim/issues/27240)
+				-- Keep an eye on: https://github.com/neovim/neovim/issues/27240
 				maxInlayHintLength = 30,
 				completion = {
 					enableServerSideFuzzyMatch = true,
