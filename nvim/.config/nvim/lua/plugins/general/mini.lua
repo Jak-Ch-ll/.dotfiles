@@ -1,17 +1,19 @@
 return {
-	'echasnovski/mini.nvim',
-	event = 'VeryLazy',
-	-- lazy = false,
-	-- enabled = false,
-	version = '*',
-	config = function()
-		require('mini.pairs').setup({
+	{
+		'echasnovski/mini.pairs',
+		version = '*',
+		event = 'VeryLazy',
+		opts = {
 			mappings = {
 				-- Add < and & for Rust lifetimes
 				["'"] = { neigh_pattern = '[^%a\\&<].' },
 			},
-		})
+		},
+	},
 
-		require('mini.ai').setup()
-	end,
+	{
+		'echasnovski/mini.ai',
+		version = '*',
+		event = 'VeryLazy',
+	},
 }
