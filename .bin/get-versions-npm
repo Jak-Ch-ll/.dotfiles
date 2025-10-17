@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# A script to get all installed versions of a given package (direct or transitive)
+# in the current npm repo
+
+package=$1
+
+npm ls $package | grep $package | cut -d@ -f2 | awk '{print $1}' | sort -u

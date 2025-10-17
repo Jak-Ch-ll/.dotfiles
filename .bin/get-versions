@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# A script to get all installed versions of a given package (direct or transitive)
+# in the current pnpm repo
+
+package=$1
+
+pnpm why $package | grep $package | awk '{print $NF}' | sort -u
