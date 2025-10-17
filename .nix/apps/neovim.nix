@@ -30,6 +30,7 @@
       ## Web Dev
       emmet-language-server
       prettierd
+      eslint_d
       svelte-language-server
       typescript
       vue-language-server

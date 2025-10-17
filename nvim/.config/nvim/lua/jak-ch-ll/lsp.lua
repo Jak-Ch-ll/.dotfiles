@@ -8,7 +8,6 @@ vim.lsp.config('*', {
 vim.lsp.enable({
 	'cssls',
 	'emmet_language_server',
-	'eslint',
 	'docker_compose_language_service',
 	'dockerls',
 	'gitlab_ci_ls',

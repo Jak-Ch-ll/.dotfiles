@@ -10,7 +10,11 @@ vim.diagnostic.config({
 		header = '',
 		suffix = function(diagnostic)
 			---@diagnostic disable-next-line: missing-return-value
-			return ' ' .. diagnostic.source .. '(' .. diagnostic.code .. ')'
+			return ' '
+				.. diagnostic.source
+				.. '('
+				.. (diagnostic.code or 'unknown')
+				.. ')'
 		end,
 	},
 	jump = {

@@ -1,29 +1,58 @@
-local prettier = { 'prettierd' }
+---@module 'lazy'
+---@module 'conform'
 
+---@type conform.FiletypeFormatterInternal
+local js_formatting = {
+	'prettierd',
+	'eslint_d',
+	stop_after_first = true,
+	lsp_format = 'fallback',
+}
+
+---@type LazySpec
 return {
 	'stevearc/conform.nvim',
 	event = { 'BufWritePre' },
 	cmd = { 'ConformInfo' },
+
+	---@type conform.setupOpts
 	opts = {
 		formatters_by_ft = {
-			javascript = prettier,
-			typescript = prettier,
-			typescriptreact = prettier,
-			vue = prettier,
+			javascript = js_formatting,
+			typescript = js_formatting,
+			typescriptreact = js_formatting,
+			vue = js_formatting,
 
-			html = prettier,
-			css = prettier,
-			scss = prettier,
+			html = js_formatting,
+			css = js_formatting,
+			scss = js_formatting,
 
-			xml = prettier,
-			yaml = prettier,
-			json = prettier,
-			jsonc = prettier,
-			markdown = prettier,
+			xml = js_formatting,
+			yaml = js_formatting,
+			json = js_formatting,
+			jsonc = js_formatting,
+			markdown = js_formatting,
 
 			nix = { 'nixfmt' },
 
 			lua = { 'stylua' },
+		},
+		formatters = {
+			prettierd = {
+				condition = function()
+					local root_dir = vim.fn.getcwd()
+
+					-- check if any file name in root_dir contains 'prettier'
+					local files = vim.fn.readdir(root_dir)
+					for _, file in ipairs(files) do
+						if string.find(file, 'prettier') then
+							return true
+						end
+					end
+
+					return false
+				end,
+			},
 		},
 		format_on_save = function(bufnr)
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
