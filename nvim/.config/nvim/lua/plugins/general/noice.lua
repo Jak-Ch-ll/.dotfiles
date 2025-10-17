@@ -12,6 +12,9 @@ return {
 		--   If not available, we use `mini` as the fallback
 		-- 'rcarriga/nvim-notify',
 	},
+
+	---@module 'noice'
+	---@type NoiceConfig
 	opts = {
 		lsp = {
 			-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -21,8 +24,13 @@ return {
 				['cmp.entry.get_documentation'] = true,
 			},
 			hover = {
+				enabled = false,
 				opts = {
 					border = 'rounded',
+				},
+				-- disable signature help and let render-markdown handle it
+				signature = {
+					enabled = false,
 				},
 			},
 		},

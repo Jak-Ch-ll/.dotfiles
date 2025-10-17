@@ -37,6 +37,7 @@
   "postcss.vim": { "branch": "master", "commit": "8d70d86ef027f468dda98890a180667359db52f2" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "refactoring.nvim": { "branch": "master", "commit": "74b608dfee827c2372250519d433cc21cb083407" },
+  "render-markdown.nvim": { "branch": "main", "commit": "ea3678daff66656a9e1c20914d204b7c841c5030" },
   "rustaceanvim": { "branch": "master", "commit": "cd67c30b63dd0fc58c4662b54d2cef50cfe60d57" },
   "schemastore.nvim": { "branch": "main", "commit": "21a54161a87ab38b85d8b1eb52cc86c973a5fafe" },
   "statuscol.nvim": { "branch": "main", "commit": "c46172d0911aa5d49ba5f39f4351d1bb7aa289cc" },

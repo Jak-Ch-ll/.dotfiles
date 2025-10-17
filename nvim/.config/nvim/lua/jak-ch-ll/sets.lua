@@ -15,16 +15,16 @@ vim.o.hidden = true
 
 vim.o.errorbells = false
 
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = 'yes'
 
 vim.o.termguicolors = true
 
 -- split window
 vim.o.laststatus = 3
-vim.cmd("highlight WinSeparator guibg=None")
+vim.cmd('highlight WinSeparator guibg=None')
 
 -- clipboard on windows
-vim.o.clipboard = "unnamedplus"
+vim.o.clipboard = 'unnamedplus'
 
 -- netrw Explorer
 vim.g.netrw_dirhistmax = 0
@@ -49,3 +49,5 @@ vim.opt.completeopt = { 'menuone', 'noinsert' }
 vim.opt.conceallevel = 2
 
 vim.o.textwidth = 80
+
+vim.opt.winborder = 'rounded'
