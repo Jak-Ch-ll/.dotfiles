@@ -29,23 +29,26 @@ in
   programs.git = {
     enable = true;
 
-    userEmail = "Jak-Ch-ll@mailbox.org";
-    userName = "J.c";
+    settings = {
+      user = {
+        email = "Jak-Ch-ll@mailbox.org";
+        name = "Jak-Ch-ll";
+      };
 
-    extraConfig = {
       init = {
         defaultBranch = "main";
       };
-    };
 
-    delta = {
-      enable = true;
+      alias = {
+        save = "!git add -A && git commit -m '🚧 Savepoint'";
+        load = "reset HEAD~";
+      };
     };
+  };
 
-    aliases = {
-      save = "!git add -A && git commit -m '🚧 Savepoint'";
-      load = "reset HEAD~";
-    };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   programs.lazygit = {
