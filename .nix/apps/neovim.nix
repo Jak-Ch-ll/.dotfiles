@@ -10,7 +10,7 @@
 
     extraPackages = with pkgs; [
       # Copilot & Mason
-      nodejs_22
+      nodejs_24
       bun
 
       # telescope-fzf
