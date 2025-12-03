@@ -31,6 +31,7 @@ return {
 			yaml = js_formatting,
 			json = js_formatting,
 			jsonc = js_formatting,
+			json5 = js_formatting,
 			markdown = js_formatting,
 
 			nix = { 'nixfmt' },
