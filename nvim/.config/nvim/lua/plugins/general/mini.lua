@@ -1,6 +1,6 @@
 return {
 	{
-		'echasnovski/mini.pairs',
+		'nvim-mini/mini.pairs',
 		version = '*',
 		event = 'VeryLazy',
 		opts = {
@@ -12,7 +12,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.ai',
+		'nvim-mini/mini.ai',
 		version = '*',
 		event = 'VeryLazy',
 	},
