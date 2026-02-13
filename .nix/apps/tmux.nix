@@ -10,7 +10,8 @@ let
       sha256 = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
     };
   };
-in {
+in
+{
   programs.tmux = {
     enable = true;
     shell = "${pkgs.fish}/bin/fish";
@@ -34,19 +35,22 @@ in {
 
       set -g @catppuccin_status_modules_right "session"
 
-
+      # required for Neovim's 'autoread' feature
+      set-option -g focus-events on
     '';
 
-    plugins = [{
-      plugin = tpm;
-      extraConfig = ''
-        set -g @plugin 'jimeh/tmux-themepack'
-        set -g @themepack 'powerline/default/purple'
-        run-shell '${tpm}/share/tmux-plugins/tpm/tpm'
+    plugins = [
+      {
+        plugin = tpm;
+        extraConfig = ''
+          set -g @plugin 'jimeh/tmux-themepack'
+          set -g @themepack 'powerline/default/purple'
+          run-shell '${tpm}/share/tmux-plugins/tpm/tpm'
 
-        # show git branch in status bar
-        set -g status-right '[#(jj-git-rev #{pane_current_path})]'
-      '';
-    }];
+          # show git branch in status bar
+          set -g status-right '[#(jj-git-rev #{pane_current_path})]'
+        '';
+      }
+    ];
   };
 }
