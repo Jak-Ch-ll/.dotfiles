@@ -9,6 +9,19 @@ local js_formatting = {
 	lsp_format = 'fallback',
 }
 
+local function has_config(config_name)
+	local root_dir = vim.fn.getcwd()
+
+	-- check if any file name in root_dir contains the config_name
+	local files = vim.fn.readdir(root_dir)
+	for _, file in ipairs(files) do
+		if string.find(file, config_name) then
+			return true
+		end
+	end
+	return false
+end
+
 ---@type LazySpec
 return {
 	'stevearc/conform.nvim',
@@ -41,17 +54,12 @@ return {
 		formatters = {
 			prettierd = {
 				condition = function()
-					local root_dir = vim.fn.getcwd()
-
-					-- check if any file name in root_dir contains 'prettier'
-					local files = vim.fn.readdir(root_dir)
-					for _, file in ipairs(files) do
-						if string.find(file, 'prettier') then
-							return true
-						end
-					end
-
-					return false
+					return has_config('prettier')
+				end,
+			},
+			eslint_d = {
+				condition = function()
+					return has_config('eslint')
 				end,
 			},
 		},
