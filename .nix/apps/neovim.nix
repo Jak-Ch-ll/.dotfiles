@@ -21,7 +21,7 @@
 
       ## Nix
       nixd
-      nixfmt-rfc-style
+      nixfmt
 
       ## Lua
       stylua
