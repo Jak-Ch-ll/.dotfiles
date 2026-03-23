@@ -42,6 +42,7 @@
       dockerfile-language-server
       gitlab-ci-ls
       yaml-language-server
+      taplo
 
       ## Rust
       rust-analyzer
