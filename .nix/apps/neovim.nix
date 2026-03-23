@@ -39,7 +39,7 @@
 
       ## Devops
       docker-compose-language-service
-      dockerfile-language-server-nodejs
+      dockerfile-language-server
       gitlab-ci-ls
       yaml-language-server
 
