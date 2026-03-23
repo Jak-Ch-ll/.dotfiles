@@ -31,6 +31,7 @@
       emmet-language-server
       prettierd
       eslint_d
+      dprint
       svelte-language-server
       typescript
       vue-language-server
