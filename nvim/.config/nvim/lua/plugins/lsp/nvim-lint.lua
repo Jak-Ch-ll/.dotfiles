@@ -16,6 +16,10 @@ return {
 		lint.linters.eslint_d = require('lint.util').wrap(
 			lint.linters.eslint_d,
 			function(diagnostic)
+				if not diagnostic.code then
+					return diagnostic
+				end
+
 				-- https://eslint.style/guide/faq#the-error-messages-squiggly-lines-for-code-style-are-annoying
 				if diagnostic.code:find('^style/') then
 					return
