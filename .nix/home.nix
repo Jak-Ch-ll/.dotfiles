@@ -88,6 +88,8 @@
     };
   };
 
+  programs.mise.enable = true;
+
   home.sessionPath = [
     "$HOME/.dotfiles/.bin"
 
