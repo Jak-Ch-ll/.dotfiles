@@ -1,9 +1,8 @@
 vim.diagnostic.config({
-	-- virtual_lines = {
-	-- 	severity = vim.diagnostic.severity.ERROR,
-	-- },
 	virtual_text = {
-		severity = vim.diagnostic.severity.WARN,
+		severity = {
+			min = vim.diagnostic.severity.WARN,
+		},
 	},
 	float = {
 		border = 'rounded',
