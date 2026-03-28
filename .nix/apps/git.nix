@@ -44,19 +44,31 @@ in
     };
   };
 
+  programs.difftastic = {
+    enable = true;
+    git = {
+      enable = true;
+      diffToolMode = true;
+    };
+  };
+
   programs.delta = {
     enable = true;
-    enableGitIntegration = true;
   };
 
   programs.lazygit = {
     enable = true;
     settings = {
       git = {
-        paging = {
-          colorArg = "always";
-          pager = "delta --dark --paging=never";
-        };
+        pagers = [
+          {
+            externalDiffCommand = "difft --color=always";
+          }
+          {
+            colorArg = "always";
+            pager = "delta --dark --paging=never";
+          }
+        ];
       };
     };
   };
