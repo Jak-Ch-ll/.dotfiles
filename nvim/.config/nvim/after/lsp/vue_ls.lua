@@ -1,6 +1,9 @@
 ---@type vim.lsp.Config
 return {
-	cmd = { 'bunx', '--bun', 'vue-language-server', '--stdio' },
+	cmd = {
+		'/home/j/projects/vue-language-tools/packages/language-server/bin/vue-language-server.js',
+		'--stdio',
+	},
 	settings = {
 		vue = {
 			complete = {
@@ -10,6 +13,9 @@ return {
 				autoInsert = {
 					dotValue = true,
 				},
+			},
+			hover = {
+				rich = 'jsdoc',
 			},
 			inlayHints = {
 				destructuredProps = true,
