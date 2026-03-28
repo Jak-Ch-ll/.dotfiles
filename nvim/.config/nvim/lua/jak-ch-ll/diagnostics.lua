@@ -8,6 +8,11 @@ vim.diagnostic.config({
 		border = 'rounded',
 		header = '',
 		suffix = function(diagnostic)
+			if not diagnostic.source then
+				---@diagnostic disable-next-line: missing-return-value
+				return ''
+			end
+
 			local suffix = ' ' .. diagnostic.source
 
 			if diagnostic.code then
