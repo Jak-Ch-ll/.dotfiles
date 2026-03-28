@@ -15,6 +15,7 @@ vim.lsp.enable({
 	'gopls',
 	'html',
 	'jsonls',
+	'oxlint',
 	'taplo',
 	'yamlls',
 	'lua_ls',
