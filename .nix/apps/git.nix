@@ -30,11 +30,6 @@ in
     enable = true;
 
     settings = {
-      user = {
-        email = "Jak-Ch-ll@mailbox.org";
-        name = "Jak-Ch-ll";
-      };
-
       init = {
         defaultBranch = "main";
       };
