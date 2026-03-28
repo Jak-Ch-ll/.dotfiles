@@ -12,6 +12,7 @@ return {
 	},
 	root_markers = { 'tsconfig.json' },
 
+	-- https://github.com/yioneko/vtsls/blob/main/packages/service/configuration.schema.json
 	settings = {
 		vtsls = {
 			tsserver = {
@@ -28,6 +29,8 @@ return {
 					},
 				},
 			},
+			-- https://github.com/yioneko/vtsls?tab=readme-ov-file#typescript-version
+			autoUseWorkspaceTsdk = true,
 			enableMoveToFileCodeAction = true,
 			experimental = {
 				-- Keep an eye on: https://github.com/neovim/neovim/issues/27240
