@@ -6,6 +6,9 @@ let
     gl = "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit";
     gs = "git status";
     gu = "git push";
+    gr = "git rebase";
+    gra = "git rebase --abort";
+    grc = "git rebase --continue";
     lg = "lazygit";
 
     js = "jj st";
