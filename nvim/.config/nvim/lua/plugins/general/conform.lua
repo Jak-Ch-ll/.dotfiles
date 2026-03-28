@@ -70,6 +70,10 @@ return {
 			return {
 				lsp_fallback = true,
 				timeout_ms = 1000,
+				filter = function(client)
+					-- Don't format with vtsls
+					return client.name ~= 'vtsls'
+				end,
 			}
 		end,
 	},
