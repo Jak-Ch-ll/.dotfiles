@@ -20,6 +20,7 @@ return {
 		{ 'nvim-lua/plenary.nvim' },
 		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		{ 'nvim-telescope/telescope-file-browser.nvim' },
+		{ 'nvim-telescope/telescope-live-grep-args.nvim' },
 	},
 	keys = {
 		{
@@ -81,7 +82,7 @@ return {
 		{
 			'<leader>sg',
 			function()
-				require('telescope.builtin').live_grep()
+				require('telescope').extensions.live_grep_args.live_grep_args()
 			end,
 			desc = '[S]earch by [G]rep',
 		},
@@ -103,6 +104,7 @@ return {
 	config = function()
 		local telescope = require('telescope')
 		local actions = require('telescope.actions')
+		local lga_actions = require('telescope-live-grep-args.actions')
 
 		telescope.setup({
 			defaults = {
@@ -117,7 +119,7 @@ return {
 					'--smart-case',
 
 					-- custom changes
-					'--hidden',
+					-- '--hidden',
 				},
 				layout_strategy = 'vertical',
 			},
@@ -136,9 +138,31 @@ return {
 					trim_text = true,
 				},
 			},
+			extensions = {
+				-- https://github.com/nvim-telescope/telescope-live-grep-args.nvim#configuration
+				live_grep_args = {
+					auto_quoting = true, -- enable/disable auto-quoting
+					-- define mappings, e.g.
+					mappings = { -- extend mappings
+						i = {
+							['<C-k>'] = lga_actions.quote_prompt(),
+							['<C-i>'] = lga_actions.quote_prompt({
+								postfix = ' --iglob ',
+							}),
+							-- freeze the current list and start a fuzzy search in the frozen list
+							['<C-space>'] = lga_actions.to_fuzzy_refine,
+						},
+					},
+					-- ... also accepts theme settings, for example:
+					-- theme = "dropdown", -- use dropdown theme
+					-- theme = { }, -- use own theme spec
+					-- layout_config = { mirror=true }, -- mirror preview pane
+				},
+			},
 		})
 		telescope.load_extension('fzf')
 		telescope.load_extension('file_browser')
 		telescope.load_extension('harpoon')
+		telescope.load_extension('live_grep_args')
 	end,
 }
