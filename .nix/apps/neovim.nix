@@ -37,6 +37,7 @@
       vue-language-server
       vscode-langservers-extracted # provides css, eslint, html, json, markdown
       vtsls
+      oxfmt
       oxlint
 
       ## Devops
