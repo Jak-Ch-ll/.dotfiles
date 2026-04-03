@@ -57,6 +57,7 @@
       rust-analyzer
       rustfmt
       vscode-extensions.vadimcn.vscode-lldb.adapter
+      cargo-nextest
 
       ## Go
       gopls
