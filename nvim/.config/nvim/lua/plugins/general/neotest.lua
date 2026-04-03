@@ -18,6 +18,25 @@ return {
 
 		cmd = { 'Neotest' },
 
+		keys = {
+			{
+				'<leader>tw',
+				function()
+					local neotest = require('neotest')
+					neotest.watch.watch(vim.fn.expand('%'))
+					neotest.summary.open()
+				end,
+				desc = '[T]est [W]atch File',
+			},
+			{
+				'<leader>to',
+				function()
+					require('neotest').output.open()
+				end,
+				desc = '[T]est [O]utput',
+			},
+		},
+
 		init = function()
 			local commands = {
 				TestFile = function()
