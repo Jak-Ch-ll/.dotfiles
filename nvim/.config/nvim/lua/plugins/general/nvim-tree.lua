@@ -11,7 +11,7 @@ local function on_attach(bufnr)
 		}
 	end
 
-	api.config.mappings.default_on_attach(bufnr)
+	api.map.on_attach.default(bufnr)
 
 	-- Custom keymaps
 	for _, key in ipairs({ 'l', '<Right>' }) do
