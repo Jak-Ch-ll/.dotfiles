@@ -11,7 +11,7 @@ config.default_cursor_style = 'SteadyBar'
 config.background = {
 	{
 		source = {
-			File = wezterm.config_dir .. '/images/spiral.jpg',
+			File = wezterm.config_dir .. '/images/sunset.jpg',
 		},
 		hsb = { brightness = 0.1 },
 	},
@@ -23,10 +23,16 @@ config.default_prog = { 'fish', '-l' }
 config.window_padding = {
 	left = 16,
 	right = 16,
+
+	-- remove when replacing tmux
+	top = 16,
+	bottom = 16,
 }
 
 config.warn_about_missing_glyphs = false
 
 config.alternate_buffer_wheel_scroll_speed = 1
+
+config.audible_bell = 'Disabled'
 
 return config
